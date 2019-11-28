@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+@import "variables";
+@import "media";
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	color: $font-col-primary;
+}
+
+html, body{
+	height: 100%;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 100%;
+	background: $bg-col;
+}
+
+// home page
+.home-container{
+	background-image: radial-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url("../images/bg.jpg");
+  	background-position: center;
+ 	background-size: cover;
+ 	height: 100%;
+}
+
+.main-logo{
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%,0);
+	max-width: 80vw;
+}
+
+.main-mobile-logo{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	max-width: 80vw;
+}
+
+.main-desktop-logo{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	max-width: 50vw;
+	min-width: 800px;
+	opacity: 0;
+}
+
+.home-btn{
+	position: absolute;
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%,0);
+	font-weight: 700;
+	font-size: 1.5rem;
+	padding: 0.75rem;
+}
+
+@media screen and (min-width: 992px) {
+  .main-desktop-logo{
+  	opacity: 1;
+  }
+  .show-on-mobile{
+  	display: none;
+  }
+}
