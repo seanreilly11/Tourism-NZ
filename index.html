@@ -4,23 +4,113 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">	
 	<title>Tourism NZ Journey Planner</title>
+	<!-- bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- jqeury ui -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<!-- swiper js -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-
+	<!-- my css -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="home-container">
+	<div class="home-container wrapper">
 		<img src="images/logo.png" alt="Tourism NZ" class="main-logo mx-auto">
 		<img src="images/logo-mobile.png" alt="Tourism NZ" class="main-mobile-logo show-on-mobile  ">
 		<img src="images/logo-desktop.png" alt="Tourism NZ" class="main-desktop-logo mx-auto">
 		<button class="btn home-btn btn-info">EXPLORE NZ</button>
 	</div>
 
+	<div class="wrapper locations-wrapper">
+		<div class="container">
+			<h1 class="main-heading">Where will you be going?</h1>
+			<h2 class="sub-heading">Pick-up</h2>
+			<select class="custom-select custom-select-lg mb-5 bg-black text-white text-2">
+				<option value="2">Auckland Airport</option>
+				<option value="3">Hamilton Airport</option>
+				<option value="1">Wellington Airport</option>
+				<option value="3">Christchurch Airport</option>
+				<option value="2">Queenstown Airport</option>
+			</select>
+
+			<h2 class="sub-heading">Stopovers</h2>
+			<i class="text-1">(Ctrl+Click or Cmd+Click for multiple selection)</i>
+			<select class="custom-select custom-select-lg mb-5 bg-black text-white" multiple>
+				<option value="1" class="text-white">Palmerston North</option>
+				<option value="2" class="text-white">Hamilton</option>
+				<option value="3" class="text-white">Napier</option>
+				<option value="2" class="text-white">Taranaki</option>
+				<option value="3" class="text-white">Tauranga</option>
+				<option value="3" class="text-white">Napier</option>
+				<option value="2" class="text-white">Whangarei</option>
+				<option value="3" class="text-white">Taupo</option>
+			</select>
+
+			<h2 class="sub-heading">Drop off</h2>
+			<select class="custom-select custom-select-lg mb-5 bg-black text-white text-2">
+				<option value="2">Auckland Airport</option>
+				<option value="3">Hamilton Airport</option>
+				<option value="1">Wellington Airport</option>
+				<option value="3">Christchurch Airport</option>
+				<option value="2">Queenstown Airport</option>
+			</select>
+
+			<div class="map-icon-container">
+				<div class="map-icon">
+					<img class="map-icon-pin" src="images/pin-icon.png" alt="View Map">
+				</div>
+				<h2 class="text">View stops on map</h2>
+			</div>
+			<!-- navigation -->
+			<div class="next-page-arrow">
+				<img class="next-arrow" src="images/right-arrow.png" alt="Next Page">
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper date-wrapper">
+		<div class="container">
+			<h1 class="main-heading">What dates will you be travelling?</h1>
+			<label for="from" class="text-2 text">Pick-up Date:</label>
+			<input type="text" class="form-control text-2" id="from" name="from" autocomplete="off">
+
+			<label for="to" class="text-2 text pt-5">Drop off Date:</label>
+			<input type="text" class="form-control text-2" id="to" name="to" autocomplete="off">
+	
+			<p class="text-2 text-center pt-3" id="numberOfDays"></p>
+			<!-- navigation -->
+			<div class="back-page-arrow">
+				<img class="page-arrow" src="images/left-arrow.png" alt="Back Page">
+			</div>
+			<div class="next-page-arrow">
+				<img class="page-arrow" src="images/right-arrow.png" alt="Next Page">
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper people-wrapper">
+		<div class="container">
+			<h1 class="main-heading">How many people are travelling?</h1>
+			<!-- navigation -->
+			<div class="back-page-arrow">
+				<img class="page-arrow" src="images/left-arrow.png" alt="Back Page">
+			</div>
+			<div class="next-page-arrow">
+				<img class="page-arrow" src="images/right-arrow.png" alt="Next Page">
+			</div>
+		</div>
+	</div>
+
+	<!-- bootstraps -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<!-- jquery ui -->
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!-- swiper js -->
 	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
+	<!-- my script -->
 	<script src="js/script.js"></script>
 </script>
 </body>

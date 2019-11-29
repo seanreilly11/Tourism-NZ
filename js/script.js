@@ -214,14 +214,35 @@ var vehicles = [
 // }
 
 
+// date picker
+var oneDay = 86400000;
+$("#from").datepicker({
+	dateFormat: 'yy-mm-dd',
+	changeMonth: true,
+	minDate: new Date(),
+	maxDate: '+1y',
+	onSelect: function(date){
+		var selectedDate = new Date(date);
+		var stDate = new Date(selectedDate.getTime() + oneDay);
+		console.log(selectedDate)
+	     //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+	     $("#to").datepicker("option", "minDate", stDate);
 
+	     var enDate = new Date(selectedDate.getTime() + 15 * oneDay);
+	     $("#to").datepicker("option", "maxDate", enDate);
+	 }
+});
 
-
-
-
-
-
-
+$("#to").datepicker({
+	dateFormat: 'yy-mm-dd',
+	changeMonth: true,
+	onSelect: function(){ // find number of days of journey
+		var start = $('#from').datepicker('getDate');
+		var end = $('#to').datepicker('getDate');
+		var noDays = (end - start)/oneDay;
+		document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days"
+	}
+});
 
 
 

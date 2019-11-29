@@ -9,19 +9,76 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: #000; }
+  color: #000;
+  font-family: 'Open Sans', sans-serif; }
 
 html, body {
   height: 100%;
+  font-size: 62.5%;
+  background: #fff;
+  font-family: 'Open Sans', sans-serif; }
+
+.wrapper {
+  height: 100%;
+  width: 100%; }
+
+.container {
+  width: 90%;
+  height: 100%;
+  margin: auto;
+  position: relative; }
+
+.bg-black {
+  background-color: #000; }
+
+.next-page-arrow {
+  position: absolute;
+  top: 80%;
+  width: 90%; }
+
+.back-page-arrow {
+  position: absolute;
+  top: 80%;
+  width: 90%; }
+
+.page-arrow {
+  max-width: 15%; }
+
+.next-page-arrow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top: 80%;
+  width: 90%; }
+
+.next-arrow {
+  max-width: 15%; }
+
+.text {
+  font-weight: 600; }
+
+.text-1 {
+  font-size: 1rem; }
+
+.text-2, option {
+  font-size: 1.6rem; }
+
+.main-heading {
   font-family: 'Open Sans', sans-serif;
-  font-size: 100%;
-  background: #fff; }
+  font-weight: 700;
+  font-size: 3.6rem;
+  padding-top: 20%;
+  padding-bottom: 3rem; }
+
+.sub-heading {
+  font-weight: 600; }
 
 .home-container {
   background-image: radial-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url("../images/bg.jpg");
   background-position: center;
-  background-size: cover;
-  height: 100%; }
+  background-size: cover; }
 
 .main-logo {
   position: absolute;
@@ -52,8 +109,28 @@ html, body {
   left: 50%;
   transform: translate(-50%, 0);
   font-weight: 700;
-  font-size: 1.5rem;
-  padding: 0.75rem; }
+  font-size: 2.4rem;
+  padding: 1rem; }
+
+.map-icon-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer; }
+
+.map-icon {
+  background: #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  width: 8rem;
+  height: 8rem;
+  margin-bottom: 1rem; }
+
+.map-icon-pin {
+  max-height: 4rem; }
 
 @media screen and (min-width: 992px) {
   .main-desktop-logo {
