@@ -14,7 +14,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="home-container wrapper">
+	<div class="wrapper home-wrapper">
 		<img src="images/logo.png" alt="Tourism NZ" class="main-logo mx-auto">
 		<img src="images/logo-mobile.png" alt="Tourism NZ" class="main-mobile-logo show-on-mobile  ">
 		<img src="images/logo-desktop.png" alt="Tourism NZ" class="main-desktop-logo mx-auto">
@@ -34,16 +34,19 @@
 			</select>
 
 			<h2 class="sub-heading">Stopovers</h2>
-			<i class="text-1">(Ctrl+Click or Cmd+Click for multiple selection)</i>
+			<i class="text-1">(Ctrl+Click or Cmd+Click for multiple selection)</i><br>
 			<select class="custom-select custom-select-lg mb-5 bg-black text-white" multiple>
-				<option value="1" class="text-white">Palmerston North</option>
+				<option value="2" class="text-white">Whangarei</option>
 				<option value="2" class="text-white">Hamilton</option>
+				<option value="3" class="text-white">Tauranga</option>
+				<option value="3" class="text-white">Taupo</option>
 				<option value="3" class="text-white">Napier</option>
 				<option value="2" class="text-white">Taranaki</option>
-				<option value="3" class="text-white">Tauranga</option>
-				<option value="3" class="text-white">Napier</option>
-				<option value="2" class="text-white">Whangarei</option>
-				<option value="3" class="text-white">Taupo</option>
+				<option value="1" class="text-white">Palmerston North</option>
+				<option value="3" class="text-white">Nelson</option>
+				<option value="3" class="text-white">Christchurch</option>
+				<option value="2" class="text-white">Dunedin</option>
+				<option value="3" class="text-white">Queenstown</option>
 			</select>
 
 			<h2 class="sub-heading">Drop off</h2>
@@ -56,34 +59,34 @@
 			</select>
 
 			<div class="map-icon-container">
-				<div class="map-icon">
+				<div class="map-icon clickable view-map">
 					<img class="map-icon-pin" src="images/pin-icon.png" alt="View Map">
 				</div>
-				<h2 class="text">View stops on map</h2>
+				<h2 class="text clickable">View stops on map</h2>
 			</div>
 			<!-- navigation -->
 			<div class="next-page-arrow">
-				<img class="next-arrow" src="images/right-arrow.png" alt="Next Page">
+				<img class="page-arrow" id="locations-next" src="images/right-arrow.png" alt="Next Page">
 			</div>
 		</div>
 	</div>
 
-	<div class="wrapper date-wrapper">
+	<div class="wrapper dates-wrapper">
 		<div class="container">
 			<h1 class="main-heading">What dates will you be travelling?</h1>
-			<label for="from" class="text-2 text">Pick-up Date:</label>
-			<input type="text" class="form-control text-2" id="from" name="from" autocomplete="off">
+			<div class="center">
+				<label for="from" class="text-2 text">Pick-up Date:</label>
+				<input type="text" class="form-control text-2" id="from" name="from" autocomplete="off">
 
-			<label for="to" class="text-2 text pt-5">Drop off Date:</label>
-			<input type="text" class="form-control text-2" id="to" name="to" autocomplete="off">
-	
-			<p class="text-2 text-center pt-3" id="numberOfDays"></p>
-			<!-- navigation -->
-			<div class="back-page-arrow">
-				<img class="page-arrow" src="images/left-arrow.png" alt="Back Page">
+				<label for="to" class="text-2 text pt-5">Drop off Date:</label>
+				<input type="text" class="form-control text-2" id="to" name="to" autocomplete="off">
+		
+				<p class="text-2 pt-5" id="numberOfDays"></p>
 			</div>
-			<div class="next-page-arrow">
-				<img class="page-arrow" src="images/right-arrow.png" alt="Next Page">
+			<!-- navigation -->
+			<div class="page-arrows">
+				<img class="page-arrow" id="dates-back" src="images/left-arrow.png" alt="Back Page">
+				<img class="page-arrow" id="dates-next" src="images/right-arrow.png" alt="Next Page">
 			</div>
 		</div>
 	</div>
@@ -91,14 +94,48 @@
 	<div class="wrapper people-wrapper">
 		<div class="container">
 			<h1 class="main-heading">How many people are travelling?</h1>
-			<!-- navigation -->
-			<div class="back-page-arrow">
-				<img class="page-arrow" src="images/left-arrow.png" alt="Back Page">
+			<div class="people-counter">
+				<img class="people-icon" id="minus-people" src="images/minus.png" alt="Minus people">
+				<span id="people-number">1</span>
+				<img class="people-icon" id="add-people" src="images/plus.png" alt="Add people">
 			</div>
-			<div class="next-page-arrow">
-				<img class="page-arrow" src="images/right-arrow.png" alt="Next Page">
+			<!-- navigation -->
+			<div class="page-arrows">
+				<img class="page-arrow" id="people-back" src="images/left-arrow.png" alt="Back Page">
+				<img class="page-arrow" id="people-next" src="images/right-arrow.png" alt="Next Page">
 			</div>
 		</div>
+	</div>
+
+	<div class="wrapper people-wrapper">
+		<div class="container">
+			<h1 class="main-heading">How many people are travelling?</h1>
+			<div class="people-counter">
+				<img class="people-icon" id="minus-people" src="images/minus.png" alt="Minus people">
+				<span id="people-number">1</span>
+				<img class="people-icon" id="add-people" src="images/plus.png" alt="Add people">
+			</div>
+			<!-- navigation -->
+			<div class="page-arrows">
+				<img class="page-arrow" id="people-back" src="images/left-arrow.png" alt="Back Page">
+				<img class="page-arrow" id="people-next" src="images/right-arrow.png" alt="Next Page">
+			</div>
+		</div>
+	</div>
+
+	<div class="wrapper vehicles-wrapper">
+		<div class="container">
+			<h1 class="vehicles-heading">Vehicles</h1>
+		</div>
+	</div>
+
+
+	<!-- map -->
+	<div class="wrapper map-wrapper">
+		<button type="button" class="close m-3" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+		<div id="map-container"></div>
 	</div>
 
 	<!-- bootstraps -->
@@ -111,6 +148,7 @@
 	<!-- swiper js -->
 	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 	<!-- my script -->
+	<script src="js/config.json"></script>
 	<script src="js/script.js"></script>
 </script>
 </body>

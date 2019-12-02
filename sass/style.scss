@@ -17,8 +17,9 @@ html, body{
 }
 
 .wrapper{
- 	height: 100%;
- 	width: 100%;	
+	height: 100%;
+	width: 100%;
+	top: 0;	
 }
 
 .container{
@@ -32,34 +33,31 @@ html, body{
 	background-color: #000;
 }
 
-.next-page-arrow{
-	position: absolute;
-	top: 80%;
-	width: 90%;
-}
-
-.back-page-arrow{
-	position: absolute;
-	top: 80%;
-	width: 90%;
-}
-
 .page-arrow{
-	max-width: 15%;
+	max-width: 50px;
+	cursor: pointer;
+}
+
+.page-arrows{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: absolute;
+	top: 80%;
+	width: 90%;
 }
 
 .next-page-arrow{
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	flex-direction: row;
 	position: absolute;
 	top: 80%;
 	width: 90%;
 }
 
-.next-arrow{
-	max-width: 15%;
+.clickable{
+	cursor: pointer;
 }
 
 .text{
@@ -70,8 +68,19 @@ html, body{
 	font-size: 1rem;
 }
 
-.text-2, option{
+.text-16, option{
 	font-size: 1.6rem;
+}
+
+.text-2{
+	font-size: 2rem;
+}
+
+.center{
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 90%;
 }
 
 .main-heading{
@@ -87,10 +96,10 @@ html, body{
 }
 
 // home page
-.home-container{
+.home-wrapper{
 	background-image: radial-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url("../images/bg.jpg");
-  	background-position: center;
- 	background-size: cover;
+	background-position: center;
+	background-size: cover;
 }
 
 .main-logo{
@@ -153,16 +162,69 @@ html, body{
 	max-height: 4rem;
 }
 
+// dates page
+#numberOfDays{
+	text-align: center;
+}
+
+// people page
+.people-counter{
+	display: flex;	
+	justify-content: space-between;
+	align-items: center;
+	@extend .center;
+}
+
+.people-icon{
+	max-width: 50px;
+}
+
+#people-number{
+	font-size: 3.6rem;
+	font-weight: 700;
+}
+
+// map page
+.close{
+	font-size: 4.2rem;
+}
+
+#map-container{
+	width: 100%;
+	height: 100%;
+}
+
+// vehciles page
+.vehicles-heading{
+	@extend .main-heading;
+	padding: 2rem 0;
+}
+
+
+
+
+
+
 
 
 
 
 // media queries
 @media screen and (min-width: 992px) {
-  .main-desktop-logo{
-  	opacity: 1;
-  }
-  .show-on-mobile{
-  	display: none;
-  }
+	.main-desktop-logo{
+		opacity: 1;
+	}
+	.show-on-mobile{
+		display: none;
+	}
+	.form-control{
+		max-width: 400px;
+	}
+	#numberOfDays{
+		text-align: left;
+	}
+	.people-counter{
+		max-width: 300px;
+
+	}
 }
