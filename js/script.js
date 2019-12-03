@@ -209,6 +209,9 @@ var vehicles = [
 }
 ];
 
+var startDate, endDate, noDays, waypts, stopovers, startPt, endPt;
+var numberOfPeople = 1;
+
 // add acript tag with api key
 var myKey = JSON.parse(apiKey);
 var script = document.createElement('script');
@@ -217,73 +220,108 @@ document.getElementsByTagName('body')[0].appendChild(script);
 
 
 function initMap() {
-  // var directionsService = new google.maps.DirectionsService;
-  // var directionsRenderer = new google.maps.DirectionsRenderer;
-  // var map = new google.maps.Map(document.getElementById('map'), {
-  //   zoom: 6,
-  //   center: {lat: -41.3, lng: 173.6}
-  // });
-  // directionsRenderer.setMap(map);
+	var directionsService = new google.maps.DirectionsService;
+	var directionsRenderer = new google.maps.DirectionsRenderer;
+	var map = new google.maps.Map(document.getElementById('map-container'), {
+		zoom: 6,
+		center: {lat: -41.3, lng: 173.6}
+	});
+	directionsRenderer.setMap(map);
 
-  $(".view-map").click(function(){
-  	calculateAndDisplayRoute(directionsService, directionsRenderer);
-  });
+	$(".view-map").click(function(){
+		calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+	});
 }
 
-// function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-//   var waypts = [];
-//   var checkboxArray = document.getElementById('waypoints');
-//   for (var i = 0; i < checkboxArray.length; i++) {
-//     if (checkboxArray.options[i].selected) {
-//       waypts.push({
-//         location: checkboxArray[i].value,
-//         stopover: true
-//       });
-//     }
-//   }
+function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+	waypts = [];
+	var checkboxArray = document.getElementById('waypoints');
+	for (var i = 0; i < checkboxArray.length; i++) {
+		if (checkboxArray.options[i].selected) {
+			waypts.push({
+				location: checkboxArray[i].value,
+				stopover: true
+			});
+		}
+	}
 
-//   directionsService.route({
-//     origin: document.getElementById('start').value,
-//     destination: document.getElementById('end').value,
-//     waypoints: waypts,
-//     optimizeWaypoints: true,
-//     travelMode: 'DRIVING'
-//   }, function(response, status) {
-//     if (status === 'OK') {
-//       console.log(response);
-//       directionsRenderer.setDirections(response);
-//       var route = response.routes[0];
-//       console.log(route);
-//       var summaryPanel = document.getElementById('directions-panel');
-//       summaryPanel.innerHTML = '';
-//       // For each route, display summary information.
-//       for (var i = 0; i < route.legs.length; i++) {
-//         var routeSegment = i + 1;
-//         summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-//         '</b><br>';
-//         summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
-//         summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
-//         summaryPanel.innerHTML += route.legs[i].distance.text + '<br><br>';
-//         summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
-//         var distance = parseFloat(route.legs[i].distance.text);
-//       }
-//     } else {
-//       window.alert('Directions request failed due to ' + status);
-//     }
-//   });
-// }
+	directionsService.route({
+		origin: document.getElementById('start').value,
+		destination: document.getElementById('end').value,
+		waypoints: waypts,
+		optimizeWaypoints: true,
+		travelMode: 'DRIVING'
+	}, function(response, status) {
+		if (status === 'OK') {
+			directionsRenderer.setDirections(response);
+			var route = response.routes[0];
+      // var summaryPanel = document.getElementById('directions-panel');
+      // summaryPanel.innerHTML = '';
+      // For each route, display summary information.
+      for (var i = 0; i < route.legs.length; i++) {
+      //   var routeSegment = i + 1;
+      //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
+      //   '</b><br>';
+        console.log(route.legs[i].start_address);
+        console.log(route.legs[i].end_address) ;
+        console.log(route.legs[i].distance.text);
+      //   summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
+      //   var distance = parseFloat(route.legs[i].distance.text);
+      }
+  } else {
+  	window.alert('Directions request failed due to ' + status);
+  	$(".map-wrapper").fadeOut();
+  }
+});
+}
+
+// https://github.com/nolimits4web/Swiper/blob/master/demos/240-effect-coverflow.html
+// print vehciles that match the description
+function printVehicles(){
+	for(var i = 0; i < vehicles.length; i++){
+		if(noDays > vehicles[i].minDays 
+		&& noDays < vehicles[i].maxDays
+		&& numberOfPeople > vehicles[i].minPeople 
+		&& numberOfPeople < vehicles[i].maxPeople){
+			if(vehicles[i].type === "small"){
+				var small = "";
+				small += '<h2 class="vehicle-type-heading">Small Cars</h2><div class="swiper-container"><div class="swiper-wrapper">';
+				+ '<div class="swiper-slide"></div>';
+
+	  //  </div>
+	  //   <!-- Add Pagination -->
+	  //   <div class="swiper-pagination"></div>
+	  // </div>
+				document.getElementById("small-cars-container").innerHTML = small;
+			}
+		}
+	}
+}
 
 
+// get location values
+document.getElementById("locations-next").addEventListener("click", function(){
+	startPt = $('#start option:selected').text();
+	endPt = $('#end option:selected').text();
+	stopovers = [];
+	var checkedArray = document.getElementById('waypoints');
+	for (var i = 0; i < checkedArray.length; i++) {
+		if (checkedArray.options[i].selected) {
+			stopovers.push({
+				location: checkedArray[i].value,
+				name: checkedArray[i].innerHTML,
+				stopover: true
+			});
+		}
+	}
+	// console.log(startPt, endPt)
+	// for(var j = 0; j<stopovers.length; j++){
+	// 	console.log(stopovers[j].name)
+	// }
+});
 
 
-
-
-
-
-
-
-
-var startDate, endDate, noDays;
 // date picker
 var oneDay = 86400000;
 $("#from").datepicker({
@@ -305,10 +343,10 @@ $("#from").datepicker({
 	    endDate = $('#to').datepicker('getDate');
 	    noDays = (endDate - startDate)/oneDay;
 	    if(startDate != null && endDate != null){
-	    	document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days"
+	    	document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days";
 	    }
-	 }
-	});
+	}
+});
 
 $("#to").datepicker({
 	dateFormat: 'yy-mm-dd',
@@ -318,15 +356,18 @@ $("#to").datepicker({
 		endDate = $('#to').datepicker('getDate');
 		noDays = (endDate - startDate)/oneDay;
 		if(startDate != null && endDate != null){
-			document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days"
+			document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days";
 		}
 	}
 });
 
 
-// show number of people
-var numberOfPeople = 1;
 
+
+
+
+
+// show number of people
 $("#minus-people").click(function(){
 	if(numberOfPeople > 1){
 		numberOfPeople --;
@@ -342,13 +383,13 @@ $("#add-people").click(function(){
 });
 
 
-
 // jquery hide and show
 // NEXT
 $(".locations-wrapper").hide();
 $(".dates-wrapper").hide();
 $(".people-wrapper").hide();
 $(".map-wrapper").hide();
+$(".vehicles-wrapper").hide();
 
 
 $(".home-btn").click(function(){
@@ -357,19 +398,42 @@ $(".home-btn").click(function(){
 });
 
 $("#locations-next").click(function(){
-	$(".locations-wrapper").fadeOut();
-	$(".dates-wrapper").fadeIn();
+	if((start.value != end.value) || (start.value == end.value && waypoints.value != "")){
+		$(".locations-wrapper").fadeOut();
+		$(".dates-wrapper").fadeIn();
+	}
+	else{
+		$(".not-valid-locations").show();
+	}
 });
 
 $("#dates-next").click(function(){
-	$(".dates-wrapper").fadeOut();
-	$(".people-wrapper").fadeIn();
+	if(from.value != "" && to.value != ""){
+		$(".dates-wrapper").fadeOut();
+		$(".people-wrapper").fadeIn();
+		// console.log(from.value, to.value)
+	}
+	else{
+		$(".not-valid-date").show();
+	}
 });
 
 $("#people-next").click(function(){
 	$(".people-wrapper").fadeOut();
 	$(".vehicles-wrapper").fadeIn();
+	printVehicles();
 });
+
+// open and close map
+$(".view-map").click(function(){
+	$(".map-wrapper").fadeIn();
+});
+
+$("#close-map").click(function(){
+	$(".map-wrapper").fadeOut();
+});
+
+
 
 // BACK
 $("#dates-back").click(function(){

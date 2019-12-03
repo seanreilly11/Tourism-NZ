@@ -33,29 +33,6 @@ html, body{
 	background-color: #000;
 }
 
-.page-arrow{
-	max-width: 50px;
-	cursor: pointer;
-}
-
-.page-arrows{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	position: absolute;
-	top: 80%;
-	width: 90%;
-}
-
-.next-page-arrow{
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	position: absolute;
-	top: 80%;
-	width: 90%;
-}
-
 .clickable{
 	cursor: pointer;
 }
@@ -83,6 +60,11 @@ html, body{
 	width: 90%;
 }
 
+.not-valid{
+	font-size: 1.2rem;
+	color: red;
+}
+
 .main-heading{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 700;
@@ -93,6 +75,29 @@ html, body{
 
 .sub-heading{
 	font-weight: 600;
+}
+
+.wrapper-footer{
+	position: absolute;
+	top: 80%;
+	margin: auto;
+	width: 90%;
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	align-items: center;
+	justify-items: center;
+}
+
+.page-arrow{
+	max-width: 50px;
+	cursor: pointer;
+}
+.back-page-arrow{
+	grid-column: 1/3;
+}
+
+.next-page-arrow{
+	grid-column: 11/13;
 }
 
 // home page
@@ -144,6 +149,7 @@ html, body{
 	align-items: center;
 	flex-direction: column;
 	cursor: pointer;
+	grid-column: 3/11;
 }
 
 .map-icon{
@@ -162,9 +168,17 @@ html, body{
 	max-height: 4rem;
 }
 
+.not-valid-locations{
+	display: none;
+}
+
 // dates page
 #numberOfDays{
 	text-align: center;
+}
+
+.not-valid-date{
+	display: none;
 }
 
 // people page
@@ -185,19 +199,25 @@ html, body{
 }
 
 // map page
+.map-wrapper{
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
 .close{
 	font-size: 4.2rem;
 }
 
 #map-container{
 	width: 100%;
-	height: 100%;
+	height: 90%;
 }
 
 // vehciles page
 .vehicles-heading{
 	@extend .main-heading;
-	padding: 2rem 0;
+	padding: 3rem 0;
 }
 
 

@@ -32,26 +32,6 @@ html, body {
 .bg-black {
   background-color: #000; }
 
-.page-arrow {
-  max-width: 50px;
-  cursor: pointer; }
-
-.page-arrows {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: absolute;
-  top: 80%;
-  width: 90%; }
-
-.next-page-arrow {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: absolute;
-  top: 80%;
-  width: 90%; }
-
 .clickable {
   cursor: pointer; }
 
@@ -73,6 +53,10 @@ html, body {
   transform: translateY(-50%);
   width: 90%; }
 
+.not-valid {
+  font-size: 1.2rem;
+  color: red; }
+
 .main-heading, .vehicles-heading {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
@@ -82,6 +66,26 @@ html, body {
 
 .sub-heading {
   font-weight: 600; }
+
+.wrapper-footer {
+  position: absolute;
+  top: 80%;
+  margin: auto;
+  width: 90%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: center;
+  justify-items: center; }
+
+.page-arrow {
+  max-width: 50px;
+  cursor: pointer; }
+
+.back-page-arrow {
+  grid-column: 1/3; }
+
+.next-page-arrow {
+  grid-column: 11/13; }
 
 .home-wrapper {
   background-image: radial-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url("../images/bg.jpg");
@@ -124,7 +128,8 @@ html, body {
   display: flex;
   align-items: center;
   flex-direction: column;
-  cursor: pointer; }
+  cursor: pointer;
+  grid-column: 3/11; }
 
 .map-icon {
   background: #ccc;
@@ -140,8 +145,14 @@ html, body {
 .map-icon-pin {
   max-height: 4rem; }
 
+.not-valid-locations {
+  display: none; }
+
 #numberOfDays {
   text-align: center; }
+
+.not-valid-date {
+  display: none; }
 
 .people-counter {
   display: flex;
@@ -155,15 +166,20 @@ html, body {
   font-size: 3.6rem;
   font-weight: 700; }
 
+.map-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0; }
+
 .close {
   font-size: 4.2rem; }
 
 #map-container {
   width: 100%;
-  height: 100%; }
+  height: 90%; }
 
 .vehicles-heading {
-  padding: 2rem 0; }
+  padding: 3rem 0; }
 
 @media screen and (min-width: 992px) {
   .main-desktop-logo {

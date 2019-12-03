@@ -25,49 +25,52 @@
 		<div class="container">
 			<h1 class="main-heading">Where will you be going?</h1>
 			<h2 class="sub-heading">Pick-up</h2>
-			<select class="custom-select custom-select-lg mb-5 bg-black text-white text-2">
-				<option value="2">Auckland Airport</option>
-				<option value="3">Hamilton Airport</option>
-				<option value="1">Wellington Airport</option>
-				<option value="3">Christchurch Airport</option>
-				<option value="2">Queenstown Airport</option>
+			<select class="custom-select custom-select-lg mb-5 bg-black text-white text-16" id="start">
+				<option value="Auckland Airport">Auckland Airport</option>
+				<option value="201 Airport Road, RD2, Hamilton 3282">Hamilton Airport</option>
+				<option value="Stewart Duff Drive, Rongotai, Wellington 6022">Wellington Airport</option>
+				<option value="30 Durey Road, Harewood, Christchurch 8053">Christchurch Airport</option>
+				<option value="Sir Henry Wigley Drive, Frankton, Queenstown 9300">Queenstown Airport</option>
 			</select>
 
 			<h2 class="sub-heading">Stopovers</h2>
 			<i class="text-1">(Ctrl+Click or Cmd+Click for multiple selection)</i><br>
-			<select class="custom-select custom-select-lg mb-5 bg-black text-white" multiple>
-				<option value="2" class="text-white">Whangarei</option>
-				<option value="2" class="text-white">Hamilton</option>
-				<option value="3" class="text-white">Tauranga</option>
-				<option value="3" class="text-white">Taupo</option>
-				<option value="3" class="text-white">Napier</option>
-				<option value="2" class="text-white">Taranaki</option>
-				<option value="1" class="text-white">Palmerston North</option>
-				<option value="3" class="text-white">Nelson</option>
-				<option value="3" class="text-white">Christchurch</option>
-				<option value="2" class="text-white">Dunedin</option>
-				<option value="3" class="text-white">Queenstown</option>
+			<select class="custom-select custom-select-lg mb-5 bg-black text-white" multiple id="waypoints">
+				<option value="Whangarei" class="text-white">Whangarei</option>
+				<option value="Hamilton, NZ" class="text-white">Hamilton</option>
+				<option value="Tauranga" class="text-white">Tauranga</option>
+				<option value="Taupo" class="text-white">Taupo</option>
+				<option value="Napier"  class="text-white">Napier</option>
+				<option value="Taranaki" class="text-white">Taranaki</option>
+				<option value="Palmerston North" class="text-white">Palmerston North</option>
+				<option value="Wellington" class="text-white">Wellington</option>
+				<option value="Nelson" class="text-white">Nelson</option>
+				<option value="Christchurch" class="text-white">Christchurch</option>
+				<option value="Dunedin" class="text-white">Dunedin</option>
+				<option value="Queenstown" class="text-white">Queenstown</option>
 			</select>
 
 			<h2 class="sub-heading">Drop off</h2>
-			<select class="custom-select custom-select-lg mb-5 bg-black text-white text-2">
-				<option value="2">Auckland Airport</option>
-				<option value="3">Hamilton Airport</option>
-				<option value="1">Wellington Airport</option>
-				<option value="3">Christchurch Airport</option>
-				<option value="2">Queenstown Airport</option>
+			<select class="custom-select custom-select-lg bg-black text-white text-16" id="end">
+				<option value="Auckland Airport">Auckland Airport</option>
+				<option value="201 Airport Road, RD2, Hamilton 3282">Hamilton Airport</option>
+				<option value="Stewart Duff Drive, Rongotai, Wellington 6022">Wellington Airport</option>
+				<option value="30 Durey Road, Harewood, Christchurch 8053">Christchurch Airport</option>
+				<option value="Sir Henry Wigley Drive, Frankton, Queenstown 9300">Queenstown Airport</option>
 			</select>
+			<p class="not-valid-locations not-valid">You cannot drop off at the same location as pick-up without any stopovers</p>
 
-			<div class="map-icon-container">
-				<div class="map-icon clickable view-map">
-					<img class="map-icon-pin" src="images/pin-icon.png" alt="View Map">
+			<div class="wrapper-footer">
+				<div class="map-icon-container">
+					<div class="map-icon clickable view-map">
+						<img class="map-icon-pin" src="images/pin-icon.png" alt="View Map">
+					</div>
+					<h2 class="text clickable text-center">View stops on map</h2>
 				</div>
-				<h2 class="text clickable">View stops on map</h2>
+				<!-- navigation -->
+				<img class="page-arrow next-page-arrow" id="locations-next" src="images/right-arrow.png" alt="Next Page">
 			</div>
-			<!-- navigation -->
-			<div class="next-page-arrow">
-				<img class="page-arrow" id="locations-next" src="images/right-arrow.png" alt="Next Page">
-			</div>
+			
 		</div>
 	</div>
 
@@ -75,18 +78,20 @@
 		<div class="container">
 			<h1 class="main-heading">What dates will you be travelling?</h1>
 			<div class="center">
-				<label for="from" class="text-2 text">Pick-up Date:</label>
+				<label for="from" class="text-2 text">Pick-up Date: </label>
+				<span class="not-valid-date not-valid">Please enter valid pick-up date</span>
 				<input type="text" class="form-control text-2" id="from" name="from" autocomplete="off">
 
 				<label for="to" class="text-2 text pt-5">Drop off Date:</label>
+				<span class="not-valid-date not-valid">Please enter valid drop off date</span>
 				<input type="text" class="form-control text-2" id="to" name="to" autocomplete="off">
-		
+
 				<p class="text-2 pt-5" id="numberOfDays"></p>
 			</div>
 			<!-- navigation -->
-			<div class="page-arrows">
-				<img class="page-arrow" id="dates-back" src="images/left-arrow.png" alt="Back Page">
-				<img class="page-arrow" id="dates-next" src="images/right-arrow.png" alt="Next Page">
+			<div class="wrapper-footer">
+				<img class="page-arrow back-page-arrow" id="dates-back" src="images/left-arrow.png" alt="Back Page">
+				<img class="page-arrow next-page-arrow" id="dates-next" src="images/right-arrow.png" alt="Next Page">
 			</div>
 		</div>
 	</div>
@@ -100,25 +105,9 @@
 				<img class="people-icon" id="add-people" src="images/plus.png" alt="Add people">
 			</div>
 			<!-- navigation -->
-			<div class="page-arrows">
-				<img class="page-arrow" id="people-back" src="images/left-arrow.png" alt="Back Page">
-				<img class="page-arrow" id="people-next" src="images/right-arrow.png" alt="Next Page">
-			</div>
-		</div>
-	</div>
-
-	<div class="wrapper people-wrapper">
-		<div class="container">
-			<h1 class="main-heading">How many people are travelling?</h1>
-			<div class="people-counter">
-				<img class="people-icon" id="minus-people" src="images/minus.png" alt="Minus people">
-				<span id="people-number">1</span>
-				<img class="people-icon" id="add-people" src="images/plus.png" alt="Add people">
-			</div>
-			<!-- navigation -->
-			<div class="page-arrows">
-				<img class="page-arrow" id="people-back" src="images/left-arrow.png" alt="Back Page">
-				<img class="page-arrow" id="people-next" src="images/right-arrow.png" alt="Next Page">
+			<div class="wrapper-footer">
+				<img class="page-arrow back-page-arrow" id="people-back" src="images/left-arrow.png" alt="Back Page">
+				<img class="page-arrow next-page-arrow" id="people-next" src="images/right-arrow.png" alt="Next Page">
 			</div>
 		</div>
 	</div>
@@ -126,13 +115,19 @@
 	<div class="wrapper vehicles-wrapper">
 		<div class="container">
 			<h1 class="vehicles-heading">Vehicles</h1>
+			<div class="vehicles-container">
+				<div class="vehicle-type-container" id="small-cars-container"></div>
+				<div class="vehicle-type-container" id="large-cars-container"></div>
+				<div class="vehicle-type-container" id="motorhome-container"></div>
+				<div class="vehicle-type-container" id="motorbike-container"></div>
+			</div>
 		</div>
 	</div>
 
 
 	<!-- map -->
 	<div class="wrapper map-wrapper">
-		<button type="button" class="close m-3" aria-label="Close">
+		<button type="button" class="close m-3" id="close-map" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 		<div id="map-container"></div>
