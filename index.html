@@ -6,10 +6,11 @@
 	<title>Tourism NZ Journey Planner</title>
 	<!-- bootstrap -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<!-- jqeury ui -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	
 	<!-- swiper js -->
 	<link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
+	<!-- jqeury ui -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 	<!-- my css -->
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,7 +19,7 @@
 		<img src="images/logo.png" alt="Tourism NZ" class="main-logo mx-auto">
 		<img src="images/logo-mobile.png" alt="Tourism NZ" class="main-mobile-logo show-on-mobile  ">
 		<img src="images/logo-desktop.png" alt="Tourism NZ" class="main-desktop-logo mx-auto">
-		<button class="btn home-btn btn-info">EXPLORE NZ</button>
+		<button class="btn btn-home btn-info">EXPLORE NZ</button>
 	</div>
 
 	<div class="wrapper locations-wrapper">
@@ -115,11 +116,24 @@
 	<div class="wrapper vehicles-wrapper">
 		<div class="container">
 			<h1 class="vehicles-heading">Vehicles</h1>
+
 			<div class="vehicles-container">
-				<div class="vehicle-type-container" id="small-cars-container"></div>
-				<div class="vehicle-type-container" id="large-cars-container"></div>
-				<div class="vehicle-type-container" id="motorhome-container"></div>
-				<div class="vehicle-type-container" id="motorbike-container"></div>
+				<div class="vehicle-type-container" id="small-cars-container">
+					<h2 class="vehicle-type-heading text">Small Cars</h2>
+					<div class="vehicles-display mb-5" id="small-cars-display"></div>
+				</div>
+				<div class="vehicle-type-container" id="large-cars-container">
+					<h2 class="vehicle-type-heading text">Large Cars</h2>
+					<div class="vehicles-display mb-5" id="large-cars-display"></div>
+				</div>
+				<div class="vehicle-type-container" id="motorhome-container">
+					<h2 class="vehicle-type-heading text">Motorhomes</h2>
+					<div class="vehicles-display mb-5" id="motorhome-display"></div>
+				</div>
+				<div class="vehicle-type-container" id="motorbike-container">
+					<h2 class="vehicle-type-heading text">Motorbikes</h2>
+					<div class="vehicles-display mb-5" id="motorbike-display"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -143,8 +157,8 @@
 	<!-- swiper js -->
 	<script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 	<!-- my script -->
+	<script src="https://kit.fontawesome.com/6c7bb61f4b.js" crossorigin="anonymous"></script>
 	<script src="js/config.json"></script>
 	<script src="js/script.js"></script>
-</script>
 </body>
 </html>

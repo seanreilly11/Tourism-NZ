@@ -12,7 +12,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Petrol",
 	features: ["5-Star ANCAP Safety Rating", "Bluetooth Handsfree Phone", "Cruise Control"],
-	mainImg: "small1.jpg",
+	mainImg: "small1",
 	carouselImg: []
 },
 {
@@ -28,7 +28,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Petrol",
 	features: ["4-Star ANCAP Safety Rating", "Vehicle Stability Control", "Anti-lock Braking System"],
-	mainImg: "small2.jpg",
+	mainImg: "small2",
 	carouselImg: []
 },
 {
@@ -44,7 +44,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Petrol",
 	features: ["5-Star ANCAP Safety Rating", "Bluetooth Handsfree Phone", "Blind Spot Warning System"],
-	mainImg: "small3.jpg",
+	mainImg: "small3",
 	carouselImg: []
 },
 {
@@ -60,7 +60,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Diesel",
 	features: ["5-Star ANCAP Safety Rating", "Satellite Navigation", "Front Seat Warmers"],
-	mainImg: "large1.jpg",
+	mainImg: "large1",
 	carouselImg: []
 },
 {
@@ -76,7 +76,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Petrol",
 	features: ["5-Star ANCAP Safety Rating", "Bluetooth Handsfree Phone", "Cruise Control"],
-	mainImg: "large2.jpg",
+	mainImg: "large2",
 	carouselImg: []
 },
 {
@@ -92,7 +92,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Petrol",
 	features: ["Reversing Camera", "Bluetooth Handsfree Phone", "Touch Screen Audio"],
-	mainImg: "large3.jpg",
+	mainImg: "large3",
 	carouselImg: []
 },
 {
@@ -108,7 +108,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Diesel",
 	features: ["5-Star ANCAP Safety Rating", "Wireless Smartphone Charging", "Blind Spot Monitoring"],
-	mainImg: "large4.jpg",
+	mainImg: "large4",
 	carouselImg: []
 },
 {
@@ -124,7 +124,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Diesel",
 	features: ["Certified Self-Contained", "Linen & Cutlery Supplied", "Anti-lock Braking System"],
-	mainImg: "home1.jpg",
+	mainImg: "home1",
 	carouselImg: []
 },
 {
@@ -140,7 +140,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Diesel",
 	features: ["Certified Self-Contained", "Linen & Cutlery Supplied", "Huge Living Space"],
-	mainImg: "home2.jpg",
+	mainImg: "home2",
 	carouselImg: []
 },
 {
@@ -156,7 +156,7 @@ var vehicles = [
 	transmission: "Automatic",
 	fuelType: "Diesel",
 	features: ["Certified Self-Contained", "Linen & Cutlery Supplied", "Premium Kitchen Appliances"],
-	mainImg: "home3.jpg",
+	mainImg: "home3",
 	carouselImg: []
 },
 {
@@ -172,7 +172,7 @@ var vehicles = [
 	transmission: "Manual",
 	fuelType: "Petrol",
 	features: ["Electronic Dashboard", "Cruise Control", "Windscreen"],
-	mainImg: "bike1.jpg",
+	mainImg: "bike1",
 	carouselImg: []
 },
 {
@@ -188,7 +188,7 @@ var vehicles = [
 	transmission: "Manual",
 	fuelType: "Petrol",
 	features: ["Electronic Dashboard", "Cruise Control", "Windscreen"],
-	mainImg: "bike2.jpg",
+	mainImg: "bike2",
 	carouselImg: []
 },
 {
@@ -204,20 +204,13 @@ var vehicles = [
 	transmission: "Manual",
 	fuelType: "Petrol",
 	features: ["Electronic Dashboard", "Cruise Control", "Windscreen"],
-	mainImg: "bike3.jpg",
+	mainImg: "bike3",
 	carouselImg: []
 }
 ];
 
-var startDate, endDate, noDays, waypts, stopovers, startPt, endPt;
+var startDate, endDate, noDays, waypts, stopovers, startPt, endPt, totalPrice, totalDistance;
 var numberOfPeople = 1;
-
-// add acript tag with api key
-var myKey = JSON.parse(apiKey);
-var script = document.createElement('script');
-script.src='https://maps.googleapis.com/maps/api/js?key='+ myKey[0].key + '&callback=initMap';
-document.getElementsByTagName('body')[0].appendChild(script);
-
 
 function initMap() {
 	var directionsService = new google.maps.DirectionsService;
@@ -230,7 +223,9 @@ function initMap() {
 
 	$(".view-map").click(function(){
 		calculateAndDisplayRoute(directionsService, directionsRenderer);
-
+	});
+	$("#locations-next").click(function(){
+		calculateAndDisplayRoute(directionsService, directionsRenderer);
 	});
 }
 
@@ -256,45 +251,75 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 		if (status === 'OK') {
 			directionsRenderer.setDirections(response);
 			var route = response.routes[0];
-      // var summaryPanel = document.getElementById('directions-panel');
-      // summaryPanel.innerHTML = '';
-      // For each route, display summary information.
-      for (var i = 0; i < route.legs.length; i++) {
-      //   var routeSegment = i + 1;
-      //   summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment +
-      //   '</b><br>';
-        console.log(route.legs[i].start_address);
-        console.log(route.legs[i].end_address) ;
-        console.log(route.legs[i].distance.text);
-      //   summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
-      //   var distance = parseFloat(route.legs[i].distance.text);
-      }
-  } else {
-  	window.alert('Directions request failed due to ' + status);
-  	$(".map-wrapper").fadeOut();
-  }
-});
+			var distances = [];
+		    // For each route, display summary information.
+		    for (var i = 0; i < route.legs.length; i++) {
+			    distances.push(route.legs[i].distance.text);
+			    //   summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
+			    //   var distance = parseFloat(route.legs[i].distance.text);
+			}
+			calculateTotalDistance(distances);
+		} else {
+			window.alert('Directions request failed due to ' + status);
+			$(".map-wrapper").fadeOut();
+		}
+	});
 }
 
-// https://github.com/nolimits4web/Swiper/blob/master/demos/240-effect-coverflow.html
 // print vehciles that match the description
 function printVehicles(){
 	for(var i = 0; i < vehicles.length; i++){
-		if(noDays > vehicles[i].minDays 
-		&& noDays < vehicles[i].maxDays
-		&& numberOfPeople > vehicles[i].minPeople 
-		&& numberOfPeople < vehicles[i].maxPeople){
-			if(vehicles[i].type === "small"){
-				var small = "";
-				small += '<h2 class="vehicle-type-heading">Small Cars</h2><div class="swiper-container"><div class="swiper-wrapper">';
-				+ '<div class="swiper-slide"></div>';
+		if(noDays >= vehicles[i].minDays && noDays <= vehicles[i].maxDays && numberOfPeople >= vehicles[i].minPeople && numberOfPeople <= vehicles[i].maxPeople){
+			totalPrice = vehicles[i].rent * noDays;
+			var card = "";
+			card += "<div class='card' id='"+vehicles[i].mainImg+"'><img src='images/"+vehicles[i].mainImg+".jpg' class='card-img-top' alt='"+vehicles[i].name+"'>"
+			+ "<div class='card-body'><h3 class='card-title text'>"+vehicles[i].name+"</h3>"
+			+ "<ul class='card-list'>"
+			+ "<li class='card-list-item'><i class='fas fa-user text-16'></i><span class='card-list-text text-16'>"+vehicles[i].minPeople + "-" + vehicles[i].maxPeople+"</span></li>"
+			+ "<li class='card-list-item'><i class='fas fa-gas-pump text-16'></i><span class='card-list-text text-16'>"+vehicles[i].fuel + "/100km</span></li></ul>"
+			+ "<div class='card-foot'><ul class='card-pricing'>"
+			+ "<li class='card-price card-price-total accent-colour text-2 text'>$"+totalPrice+"</li>"
+			+ "<li class='card-price text-16'>$"+vehicles[i].rent+"/day</li></ul>"
+			+ "<button class='btn btn-success btn-book text-16'>BOOK NOW</button>"
+			+ "</div></div></div>";
 
-	  //  </div>
-	  //   <!-- Add Pagination -->
-	  //   <div class="swiper-pagination"></div>
-	  // </div>
-				document.getElementById("small-cars-container").innerHTML = small;
+			if(vehicles[i].type === "small"){
+				document.getElementById("small-cars-display").innerHTML += card;
+				$("#small-cars-container").show();
 			}
+			if(vehicles[i].type === "large"){
+				document.getElementById("large-cars-display").innerHTML += card;
+				$("#large-cars-container").show();
+
+			}
+			if(vehicles[i].type === "motorhome"){
+				document.getElementById("motorhome-display").innerHTML += card;
+				$("#motorhome-container").show();
+			}
+			if(vehicles[i].type === "motorbike"){
+				document.getElementById("motorbike-display").innerHTML += card;
+				$("#motorbike-container").show();
+			}
+		}
+	}
+}
+
+// calculate total distance
+function calculateTotalDistance(distances){
+	totalDistance = 0;
+	for(var i = 0; i < distances.length; i++){
+		var leg = "";
+		var distance = distances[i];
+		if(distance.includes(",")){
+			leg = distance.substr(0,distance.indexOf(","));
+			leg += distance.substr(distance.indexOf(",")+1, distance.indexOf(" "));
+			leg = parseInt(leg);
+			totalDistance += leg;
+		}
+		else{
+			leg = distance;
+			leg = parseInt(leg);
+			totalDistance += leg;
 		}
 	}
 }
@@ -315,57 +340,7 @@ document.getElementById("locations-next").addEventListener("click", function(){
 			});
 		}
 	}
-	// console.log(startPt, endPt)
-	// for(var j = 0; j<stopovers.length; j++){
-	// 	console.log(stopovers[j].name)
-	// }
 });
-
-
-// date picker
-var oneDay = 86400000;
-$("#from").datepicker({
-	dateFormat: 'yy-mm-dd',
-	changeMonth: true,
-	minDate: new Date(),
-	maxDate: '+1y',
-	onSelect: function(date){
-		var selectedDate = new Date(date);
-		var stDate = new Date(selectedDate.getTime() + oneDay);
-	    //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
-	    $("#to").datepicker("option", "minDate", stDate);
-
-	    var enDate = new Date(selectedDate.getTime() + 15 * oneDay);
-	    $("#to").datepicker("option", "maxDate", enDate);
-
-	    // print number of days
-	    startDate = $('#from').datepicker('getDate');
-	    endDate = $('#to').datepicker('getDate');
-	    noDays = (endDate - startDate)/oneDay;
-	    if(startDate != null && endDate != null){
-	    	document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days";
-	    }
-	}
-});
-
-$("#to").datepicker({
-	dateFormat: 'yy-mm-dd',
-	changeMonth: true,
-	onSelect: function(){ // find number of days of journey
-		startDate = $('#from').datepicker('getDate');
-		endDate = $('#to').datepicker('getDate');
-		noDays = (endDate - startDate)/oneDay;
-		if(startDate != null && endDate != null){
-			document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days";
-		}
-	}
-});
-
-
-
-
-
-
 
 // show number of people
 $("#minus-people").click(function(){
@@ -382,6 +357,11 @@ $("#add-people").click(function(){
 	}
 });
 
+// add acript tag with api key
+var myKey = JSON.parse(apiKey);
+var script = document.createElement('script');
+script.src='https://maps.googleapis.com/maps/api/js?key='+ myKey[0].key + '&callback=initMap';
+document.getElementsByTagName('body')[0].appendChild(script);
 
 // jquery hide and show
 // NEXT
@@ -390,9 +370,13 @@ $(".dates-wrapper").hide();
 $(".people-wrapper").hide();
 $(".map-wrapper").hide();
 $(".vehicles-wrapper").hide();
+$("#small-cars-container").hide();
+$("#large-cars-container").hide();
+$("#motorhome-container").hide();
+$("#motorbike-container").hide();
 
 
-$(".home-btn").click(function(){
+$(".btn-home").click(function(){
 	$(".home-wrapper").fadeOut();
 	$(".locations-wrapper").fadeIn();
 });
@@ -446,6 +430,48 @@ $("#people-back").click(function(){
 	$(".dates-wrapper").fadeIn();
 });
 
+
+// date picker
+var oneDay = 86400000;
+$("#from").datepicker({
+	dateFormat: 'mm-dd-yy',
+	changeMonth: true,
+	minDate: new Date(),
+	maxDate: '+1y',
+	onSelect: function(date){
+		var selectedDate = new Date(date);
+		var stDate = new Date(selectedDate.getTime() + oneDay);
+		console.log(selectedDate, stDate)
+	    //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
+	    $("#to").datepicker("option", "minDate", stDate);
+
+	    var enDate = new Date(selectedDate.getTime() + 15 * oneDay);
+	    $("#to").datepicker("option", "maxDate", enDate);
+
+	    // print number of days
+	    startDate = $('#from').datepicker('getDate');
+	    endDate = $('#to').datepicker('getDate');
+	    noDays = (endDate - startDate)/oneDay;
+	    if(startDate != null && endDate != null){
+	    	document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days";
+	    }
+	}
+});
+
+$("#to").datepicker({
+	dateFormat: 'mm-dd-yy',
+	changeMonth: true,
+	onSelect: function(){ // find number of days of journey
+		startDate = $('#from').datepicker('getDate');
+		endDate = $('#to').datepicker('getDate');
+		noDays = (endDate - startDate)/oneDay;
+		if(startDate != null && endDate != null){
+			document.getElementById("numberOfDays").innerHTML = "You have selected " + noDays + " days";
+		}
+	}
+});
+
+// swiper js
 
 
 

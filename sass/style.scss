@@ -65,6 +65,10 @@ html, body{
 	color: red;
 }
 
+.accent-colour{
+	color: $accent;
+}
+
 .main-heading{
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 700;
@@ -133,7 +137,7 @@ html, body{
 	opacity: 0;
 }
 
-.home-btn{
+.btn-home{
 	position: absolute;
 	top: 75%;
 	left: 50%;
@@ -181,6 +185,10 @@ html, body{
 	display: none;
 }
 
+.ui-datepicker{
+    font-size: 2em;
+}
+
 // people page
 .people-counter{
 	display: flex;	
@@ -220,14 +228,55 @@ html, body{
 	padding: 3rem 0;
 }
 
+.vehicle-type-heading{
+	padding: 1rem 0;
+}
 
+.vehicles-display{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 260px);
+	grid-gap: 1.6rem;
+}
 
+.card{
+	cursor: pointer;
+}
 
+.card-img-top{
+	max-width: 300px;
+}
 
+.card-list{
+	display: flex;
+}
 
+.card-list-item{
+	list-style: none;
+	flex: 1;
+}
 
+.card-list-text{
+	margin-left: .5rem;
+}
 
+.card-foot{
+	display: flex;
+	align-items: center;
+}
 
+.card-pricing{
+	flex: 1;
+}
+
+.card-price{
+	list-style: none;
+	line-height: 1;
+}
+
+.btn-book{
+	flex: 1;
+
+}
 
 // media queries
 @media screen and (min-width: 992px) {

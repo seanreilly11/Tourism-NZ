@@ -57,6 +57,9 @@ html, body {
   font-size: 1.2rem;
   color: red; }
 
+.accent-colour {
+  color: #0093de; }
+
 .main-heading, .vehicles-heading {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
@@ -115,7 +118,7 @@ html, body {
   min-width: 800px;
   opacity: 0; }
 
-.home-btn {
+.btn-home {
   position: absolute;
   top: 75%;
   left: 50%;
@@ -154,6 +157,9 @@ html, body {
 .not-valid-date {
   display: none; }
 
+.ui-datepicker {
+  font-size: 2em; }
+
 .people-counter {
   display: flex;
   justify-content: space-between;
@@ -180,6 +186,44 @@ html, body {
 
 .vehicles-heading {
   padding: 3rem 0; }
+
+.vehicle-type-heading {
+  padding: 1rem 0; }
+
+.vehicles-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 260px);
+  grid-gap: 1.6rem; }
+
+.card {
+  cursor: pointer; }
+
+.card-img-top {
+  max-width: 300px; }
+
+.card-list {
+  display: flex; }
+
+.card-list-item {
+  list-style: none;
+  flex: 1; }
+
+.card-list-text {
+  margin-left: .5rem; }
+
+.card-foot {
+  display: flex;
+  align-items: center; }
+
+.card-pricing {
+  flex: 1; }
+
+.card-price {
+  list-style: none;
+  line-height: 1; }
+
+.btn-book {
+  flex: 1; }
 
 @media screen and (min-width: 992px) {
   .main-desktop-logo {
