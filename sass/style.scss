@@ -5,7 +5,6 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
-	color: $font-col-primary;
 	font-family: 'Open Sans', sans-serif;
 }
 
@@ -33,7 +32,11 @@ html, body{
 	background-color: #000;
 }
 
-.clickable{
+.text-black{
+	color: #000;
+}
+
+.clickable, .view-map{
 	cursor: pointer;
 }
 
@@ -211,6 +214,8 @@ html, body{
 	position: fixed;
 	top: 0;
 	left: 0;
+	background: #fff;
+	z-index: 300;
 }
 
 .close{
@@ -225,7 +230,8 @@ html, body{
 // vehciles page
 .vehicles-heading{
 	@extend .main-heading;
-	padding: 3rem 0;
+	padding: 4rem 0 2rem;
+	flex: 0.3;
 }
 
 .vehicle-type-heading{
@@ -234,7 +240,7 @@ html, body{
 
 .vehicles-display{
 	display: grid;
-	grid-template-columns: repeat(auto-fit, 260px);
+	grid-template-columns: minmax(260px, 1fr);
 	grid-gap: 1.6rem;
 }
 
@@ -243,7 +249,7 @@ html, body{
 }
 
 .card-img-top{
-	max-width: 300px;
+	max-width: 400px;
 }
 
 .card-list{
@@ -270,13 +276,41 @@ html, body{
 
 .card-price{
 	list-style: none;
-	line-height: 1;
+	line-height: 1.2;
 }
 
 .btn-book{
 	flex: 1;
-
 }
+
+.journey-details{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: $font-col-primary;
+	padding: 1rem;
+	width: 100%;
+}
+	
+.journey-details-dropdown{
+	padding: 1rem;
+	width: 100%;
+	border: 1px solid #000;
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	z-index: 150;
+}
+
+
+
+
+
+
+
+
+
 
 // media queries
 @media screen and (min-width: 992px) {
@@ -294,6 +328,26 @@ html, body{
 	}
 	.people-counter{
 		max-width: 300px;
-
 	}
+	.vehicles-display{
+		grid-template-columns: repeat(4, minmax(260px, 1fr));
+	}
+	.vehicles-header{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.journey-details-group{
+		display: flex;
+	}
+	.journey-details{
+		max-width: 400px;
+	}
+	.journey-details-group{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex: 1;
+	}
+	
 }

@@ -209,7 +209,7 @@ var vehicles = [
 }
 ];
 
-var startDate, endDate, noDays, waypts, stopovers, startPt, endPt, totalPrice, totalDistance;
+var startDate, endDate, noDays, waypts, stopovers, startPt, endPt, totalPrice, totalDistance, startPtCode, endPtCode;
 var numberOfPeople = 1;
 
 function initMap() {
@@ -254,7 +254,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 			var distances = [];
 		    // For each route, display summary information.
 		    for (var i = 0; i < route.legs.length; i++) {
-			    distances.push(route.legs[i].distance.text);
+		    	distances.push(route.legs[i].distance.text);
 			    //   summaryPanel.innerHTML += route.legs[i].duration.text + '<br><br>';
 			    //   var distance = parseFloat(route.legs[i].distance.text);
 			}
@@ -269,9 +269,10 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 // print vehciles that match the description
 function printVehicles(){
 	for(var i = 0; i < vehicles.length; i++){
+		var card = "";
 		if(noDays >= vehicles[i].minDays && noDays <= vehicles[i].maxDays && numberOfPeople >= vehicles[i].minPeople && numberOfPeople <= vehicles[i].maxPeople){
 			totalPrice = vehicles[i].rent * noDays;
-			var card = "";
+
 			card += "<div class='card' id='"+vehicles[i].mainImg+"'><img src='images/"+vehicles[i].mainImg+".jpg' class='card-img-top' alt='"+vehicles[i].name+"'>"
 			+ "<div class='card-body'><h3 class='card-title text'>"+vehicles[i].name+"</h3>"
 			+ "<ul class='card-list'>"
@@ -301,7 +302,37 @@ function printVehicles(){
 				$("#motorbike-container").show();
 			}
 		}
+		if(card == ""){
+			document.getElementById("no-results").innerHTML = "Sorry, no vehicles are  available for you search. Please try another search."
+			$("#no-results-container").show();
+		}
 	}
+	// print details of journey
+	var extraStops = stopovers.length-1;
+	extraStops = extraStops.toString();
+	var jDates = from.value + ' - ' + to.value;
+	document.getElementById("journey-details-dates").innerHTML = jDates;
+	var jLocs = "";
+	if(stopovers.length > 1){
+		jLocs = startPtCode + ' > ' + stopovers[0].short + ' <sup>+' + extraStops + '</sup> > ' + endPtCode;
+	}
+	else if(stopovers.length = 1){
+		jLocs = startPtCode + ' > ' + stopovers[0].short + ' > ' + endPtCode;
+	}
+	document.getElementById("journey-details-locations").innerHTML = jLocs;
+
+	document.getElementById("pick-up-point").innerHTML = startPt;
+
+	var stopoverNames = [];
+	for(var s = 0; s < stopovers.length; s++){
+		stopoverNames.push(stopovers[s].name);
+	}
+
+	document.getElementById("stopover-points").innerHTML = stopoverNames.join(", ");
+
+	document.getElementById("drop-off-point").innerHTML = endPt;
+
+
 }
 
 // calculate total distance
@@ -328,7 +359,9 @@ function calculateTotalDistance(distances){
 // get location values
 document.getElementById("locations-next").addEventListener("click", function(){
 	startPt = $('#start option:selected').text();
+	startPtCode = $('#start option:selected').attr("data-short");
 	endPt = $('#end option:selected').text();
+	endPtCode = $('#end option:selected').attr("data-short");
 	stopovers = [];
 	var checkedArray = document.getElementById('waypoints');
 	for (var i = 0; i < checkedArray.length; i++) {
@@ -336,6 +369,7 @@ document.getElementById("locations-next").addEventListener("click", function(){
 			stopovers.push({
 				location: checkedArray[i].value,
 				name: checkedArray[i].innerHTML,
+				short: checkedArray[i].getAttribute("data-short"),
 				stopover: true
 			});
 		}
@@ -369,11 +403,13 @@ $(".locations-wrapper").hide();
 $(".dates-wrapper").hide();
 $(".people-wrapper").hide();
 $(".map-wrapper").hide();
-$(".vehicles-wrapper").hide();
+// $(".vehicles-wrapper").hide();
 $("#small-cars-container").hide();
 $("#large-cars-container").hide();
 $("#motorhome-container").hide();
 $("#motorbike-container").hide();
+$("#no-results-container").hide();
+
 
 
 $(".btn-home").click(function(){
@@ -408,6 +444,18 @@ $("#people-next").click(function(){
 	printVehicles();
 });
 
+$("#edit-dates").click(function(){
+	$(".vehicles-wrapper").fadeOut();
+	$(".dates-wrapper").fadeIn();
+});
+
+$("#expand-details").click(function(){
+	$(".journey-details-dropdown").slideToggle();
+});
+
+
+
+
 // open and close map
 $(".view-map").click(function(){
 	$(".map-wrapper").fadeIn();
@@ -441,7 +489,6 @@ $("#from").datepicker({
 	onSelect: function(date){
 		var selectedDate = new Date(date);
 		var stDate = new Date(selectedDate.getTime() + oneDay);
-		console.log(selectedDate, stDate)
 	    //Set Minimum Date of EndDatePicker After Selected Date of StartDatePicker
 	    $("#to").datepicker("option", "minDate", stDate);
 

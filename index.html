@@ -27,46 +27,46 @@
 			<h1 class="main-heading">Where will you be going?</h1>
 			<h2 class="sub-heading">Pick-up</h2>
 			<select class="custom-select custom-select-lg mb-5 bg-black text-white text-16" id="start">
-				<option value="Auckland Airport">Auckland Airport</option>
-				<option value="201 Airport Road, RD2, Hamilton 3282">Hamilton Airport</option>
-				<option value="Stewart Duff Drive, Rongotai, Wellington 6022">Wellington Airport</option>
-				<option value="30 Durey Road, Harewood, Christchurch 8053">Christchurch Airport</option>
-				<option value="Sir Henry Wigley Drive, Frankton, Queenstown 9300">Queenstown Airport</option>
+				<option value="Auckland Airport" data-short="AKL">Auckland Airport</option>
+				<option value="201 Airport Road, RD2, Hamilton 3282" data-short="HAM">Hamilton Airport</option>
+				<option value="Stewart Duff Drive, Rongotai, Wellington 6022" data-short="WLG">Wellington Airport</option>
+				<option value="30 Durey Road, Harewood, Christchurch 8053" data-short="CHC">Christchurch Airport</option>
+				<option value="Sir Henry Wigley Drive, Frankton, Queenstown 9300" data-short="ZQN">Queenstown Airport</option>
 			</select>
 
 			<h2 class="sub-heading">Stopovers</h2>
 			<i class="text-1">(Ctrl+Click or Cmd+Click for multiple selection)</i><br>
 			<select class="custom-select custom-select-lg mb-5 bg-black text-white" multiple id="waypoints">
-				<option value="Whangarei" class="text-white">Whangarei</option>
-				<option value="Hamilton, NZ" class="text-white">Hamilton</option>
-				<option value="Tauranga" class="text-white">Tauranga</option>
-				<option value="Taupo" class="text-white">Taupo</option>
-				<option value="Napier"  class="text-white">Napier</option>
-				<option value="Taranaki" class="text-white">Taranaki</option>
-				<option value="Palmerston North" class="text-white">Palmerston North</option>
-				<option value="Wellington" class="text-white">Wellington</option>
-				<option value="Nelson" class="text-white">Nelson</option>
-				<option value="Christchurch" class="text-white">Christchurch</option>
-				<option value="Dunedin" class="text-white">Dunedin</option>
-				<option value="Queenstown" class="text-white">Queenstown</option>
+				<option value="Whangarei" data-short="WHG" class="text-white">Whangarei</option>
+				<option value="Hamilton, NZ" data-short="HAM" class="text-white">Hamilton</option>
+				<option value="Tauranga" data-short="TRG" class="text-white">Tauranga</option>
+				<option value="Taupo" data-short="TPO" class="text-white">Taupo</option>
+				<option value="Napier" data-short="NAP"  class="text-white">Napier</option>
+				<option value="Taranaki" data-short="TAR" class="text-white">Taranaki</option>
+				<option value="Palmerston North" data-short="PMN" class="text-white">Palmerston North</option>
+				<option value="Wellington" data-short="WLG" class="text-white">Wellington</option>
+				<option value="Nelson" data-short="NSN" class="text-white">Nelson</option>
+				<option value="Christchurch" data-short="CHC" class="text-white">Christchurch</option>
+				<option value="Dunedin" data-short="DUN" class="text-white">Dunedin</option>
+				<option value="Queenstown" data-short="ZQN" class="text-white">Queenstown</option>
 			</select>
 
 			<h2 class="sub-heading">Drop off</h2>
 			<select class="custom-select custom-select-lg bg-black text-white text-16" id="end">
-				<option value="Auckland Airport">Auckland Airport</option>
-				<option value="201 Airport Road, RD2, Hamilton 3282">Hamilton Airport</option>
-				<option value="Stewart Duff Drive, Rongotai, Wellington 6022">Wellington Airport</option>
-				<option value="30 Durey Road, Harewood, Christchurch 8053">Christchurch Airport</option>
-				<option value="Sir Henry Wigley Drive, Frankton, Queenstown 9300">Queenstown Airport</option>
+				<option value="Auckland Airport" data-short="AKL">Auckland Airport</option>
+				<option value="201 Airport Road, RD2, Hamilton 3282" data-short="HAM">Hamilton Airport</option>
+				<option value="Stewart Duff Drive, Rongotai, Wellington 6022" data-short="WLG">Wellington Airport</option>
+				<option value="30 Durey Road, Harewood, Christchurch 8053" data-short="CHC">Christchurch Airport</option>
+				<option value="Sir Henry Wigley Drive, Frankton, Queenstown 9300" data-short="ZQN">Queenstown Airport</option>
 			</select>
 			<p class="not-valid-locations not-valid">You cannot drop off at the same location as pick-up without any stopovers</p>
 
 			<div class="wrapper-footer">
 				<div class="map-icon-container">
-					<div class="map-icon clickable view-map">
+					<div class="map-icon view-map">
 						<img class="map-icon-pin" src="images/pin-icon.png" alt="View Map">
 					</div>
-					<h2 class="text clickable text-center">View stops on map</h2>
+					<h2 class="text view-map text-center">View stops on map</h2>
 				</div>
 				<!-- navigation -->
 				<img class="page-arrow next-page-arrow" id="locations-next" src="images/right-arrow.png" alt="Next Page">
@@ -115,8 +115,35 @@
 
 	<div class="wrapper vehicles-wrapper">
 		<div class="container">
-			<h1 class="vehicles-heading">Vehicles</h1>
+			<div class="vehicles-header mb-3">	
+				<h1 class="vehicles-heading">Vehicles</h1>
+				<div class="journey-details-group" id="journey-details">
+					<div class="journey-details">
+						<p class="text-white text-2 mb-0" id="journey-details-dates"></p>
+						<div class="edit-group clickable" id="edit-dates">
+							<i class="fas fa-pencil-alt text-white text-16 mr-2"></i>
+							<span class="text-white text-16">Edit</span>
+						</div>
+					</div>
+					<div class="journey-details position-relative">
+						<p class="text-white text-2 mb-0" id="journey-details-locations"></p>
+						<p class="text-white text text-16 mb-0 clickable" id="expand-details">Expand</p>
+						<div class="edit-group clickable" id="edit-locations">
+							<i class="fas fa-pencil-alt text-white text-16 mr-2"></i><span class="text-white text-16">Edit</span>
+						</div>
+						<div class="journey-details-dropdown bg-white text-black">
+							<h3 class="text text-16 d-inline">Pick-up: </h3>
+							<span class="text-16" id="pick-up-point"></span><br>
+							<h3 class="text text-16 d-inline">Stopovers: </h3>
+							<span class="text-16" id="stopover-points"></span><br>
+							<h3 class="text text-16 d-inline">Drop off: </h3>
+							<span class="text-16" id="drop-off-point"></span>
+							<p class="view-map accent-colour text-16 mb-0">View journey on map <i class="fas fa-map-marker-alt"></i></p>
+						</div>
+					</div>
 
+				</div>
+			</div>
 			<div class="vehicles-container">
 				<div class="vehicle-type-container" id="small-cars-container">
 					<h2 class="vehicle-type-heading text">Small Cars</h2>
@@ -134,6 +161,9 @@
 					<h2 class="vehicle-type-heading text">Motorbikes</h2>
 					<div class="vehicles-display mb-5" id="motorbike-display"></div>
 				</div>
+				<div class="vehicle-type-container" id="no-results-container">
+					<h2 class="vehicle-type-heading text" id="no-results"></h2>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -141,7 +171,7 @@
 
 	<!-- map -->
 	<div class="wrapper map-wrapper">
-		<button type="button" class="close m-3" id="close-map" aria-label="Close">
+		<button type="button" class="close m-3 bg-white" id="close-map" aria-label="Close">
 			<span aria-hidden="true">&times;</span>
 		</button>
 		<div id="map-container"></div>

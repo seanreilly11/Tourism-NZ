@@ -9,7 +9,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: #000;
   font-family: 'Open Sans', sans-serif; }
 
 html, body {
@@ -32,7 +31,10 @@ html, body {
 .bg-black {
   background-color: #000; }
 
-.clickable {
+.text-black {
+  color: #000; }
+
+.clickable, .view-map {
   cursor: pointer; }
 
 .text {
@@ -175,7 +177,9 @@ html, body {
 .map-wrapper {
   position: fixed;
   top: 0;
-  left: 0; }
+  left: 0;
+  background: #fff;
+  z-index: 300; }
 
 .close {
   font-size: 4.2rem; }
@@ -185,21 +189,22 @@ html, body {
   height: 90%; }
 
 .vehicles-heading {
-  padding: 3rem 0; }
+  padding: 4rem 0 2rem;
+  flex: 0.3; }
 
 .vehicle-type-heading {
   padding: 1rem 0; }
 
 .vehicles-display {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 260px);
+  grid-template-columns: minmax(260px, 1fr);
   grid-gap: 1.6rem; }
 
 .card {
   cursor: pointer; }
 
 .card-img-top {
-  max-width: 300px; }
+  max-width: 400px; }
 
 .card-list {
   display: flex; }
@@ -220,10 +225,28 @@ html, body {
 
 .card-price {
   list-style: none;
-  line-height: 1; }
+  line-height: 1.2; }
 
 .btn-book {
   flex: 1; }
+
+.journey-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #000;
+  padding: 1rem;
+  width: 100%; }
+
+.journey-details-dropdown {
+  padding: 1rem;
+  width: 100%;
+  border: 1px solid #000;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 150; }
 
 @media screen and (min-width: 992px) {
   .main-desktop-logo {
@@ -239,6 +262,26 @@ html, body {
     text-align: left; }
 
   .people-counter {
-    max-width: 300px; } }
+    max-width: 300px; }
+
+  .vehicles-display {
+    grid-template-columns: repeat(4, minmax(260px, 1fr)); }
+
+  .vehicles-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+
+  .journey-details-group {
+    display: flex; }
+
+  .journey-details {
+    max-width: 400px; }
+
+  .journey-details-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1; } }
 
 /*# sourceMappingURL=style.css.map */
