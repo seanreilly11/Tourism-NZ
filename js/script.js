@@ -268,6 +268,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 
 // print vehciles that match the description
 function printVehicles(){
+	document.getElementById("small-cars-display").innerHTML = "";
+	document.getElementById("large-cars-display").innerHTML = "";
+	document.getElementById("motorhome-display").innerHTML = "";
+	document.getElementById("motorbike-display").innerHTML = "";
+	var count = 0;
 	for(var i = 0; i < vehicles.length; i++){
 		var card = "";
 		if(noDays >= vehicles[i].minDays && noDays <= vehicles[i].maxDays && numberOfPeople >= vehicles[i].minPeople && numberOfPeople <= vehicles[i].maxPeople){
@@ -281,36 +286,38 @@ function printVehicles(){
 			+ "<div class='card-foot'><ul class='card-pricing'>"
 			+ "<li class='card-price card-price-total accent-colour text-2 text'>$"+totalPrice+"</li>"
 			+ "<li class='card-price text-16'>$"+vehicles[i].rent+"/day</li></ul>"
-			+ "<button class='btn btn-success btn-book text-16'>BOOK NOW</button>"
+			+ "<button id='"+ vehicles[i].mainImg + "' class='btn btn-success btn-book text-16'>BOOK NOW</button>"
 			+ "</div></div></div>";
 
 			if(vehicles[i].type === "small"){
 				document.getElementById("small-cars-display").innerHTML += card;
 				$("#small-cars-container").show();
+				count++;
 			}
 			if(vehicles[i].type === "large"){
 				document.getElementById("large-cars-display").innerHTML += card;
 				$("#large-cars-container").show();
-
+				count++;
 			}
 			if(vehicles[i].type === "motorhome"){
 				document.getElementById("motorhome-display").innerHTML += card;
 				$("#motorhome-container").show();
+				count++;
 			}
 			if(vehicles[i].type === "motorbike"){
 				document.getElementById("motorbike-display").innerHTML += card;
 				$("#motorbike-container").show();
+				count++;
 			}
 		}
-		if(card == ""){
-			document.getElementById("no-results").innerHTML = "Sorry, no vehicles are  available for you search. Please try another search."
-			$("#no-results-container").show();
-		}
+	}
+	if(count === 0){
+		$("#no-results-container").show();
 	}
 	// print details of journey
 	var extraStops = stopovers.length-1;
 	extraStops = extraStops.toString();
-	var jDates = from.value + ' - ' + to.value;
+	var jDates = changeDateFormat();
 	document.getElementById("journey-details-dates").innerHTML = jDates;
 	var jLocs = "";
 	if(stopovers.length > 1){
@@ -332,7 +339,38 @@ function printVehicles(){
 
 	document.getElementById("drop-off-point").innerHTML = endPt;
 
+	$(".btn-book").click(function(){
+		$(".vehicles-wrapper").fadeOut();
+		$(".booking-wrapper").fadeIn();
+		printDetails();
+	});
+}
 
+// print booking summary
+function printDetails(){
+	console.log("Leshgo")
+}
+
+function changeDateFormat(){
+	var f = from.value;
+	var t = to.value;
+
+	var yearF = f.substr(0,4);
+	var monthF = f.substr(5,7);
+	monthF = parseInt(monthF);
+	monthF = monthF.toString();
+	var dayF = f.substr(8);
+	var fromDate = dayF + "/" + monthF + "/" + yearF;
+
+	var yearT = t.substr(0,4);
+	var monthT = t.substr(5,7);
+	monthT = parseInt(monthT);
+	monthT = monthT.toString();
+	var dayT = t.substr(8);
+	var toDate = dayT + "/" + monthT + "/" + yearT;
+	var range = fromDate + " - " + toDate;
+	return range;
+	
 }
 
 // calculate total distance
@@ -403,7 +441,8 @@ $(".locations-wrapper").hide();
 $(".dates-wrapper").hide();
 $(".people-wrapper").hide();
 $(".map-wrapper").hide();
-// $(".vehicles-wrapper").hide();
+$(".vehicles-wrapper").hide();
+// $(".booking-wrapper").hide();
 $("#small-cars-container").hide();
 $("#large-cars-container").hide();
 $("#motorhome-container").hide();
@@ -440,9 +479,11 @@ $("#dates-next").click(function(){
 
 $("#people-next").click(function(){
 	$(".people-wrapper").fadeOut();
-	$(".vehicles-wrapper").fadeIn();
 	printVehicles();
+	$(".vehicles-wrapper").fadeIn();
 });
+
+
 
 $("#edit-dates").click(function(){
 	$(".vehicles-wrapper").fadeOut();
@@ -453,7 +494,10 @@ $("#expand-details").click(function(){
 	$(".journey-details-dropdown").slideToggle();
 });
 
-
+$("#edit-locations").click(function(){
+	$(".vehicles-wrapper").fadeOut();
+	$(".locations-wrapper").fadeIn();
+});
 
 
 // open and close map
@@ -464,7 +508,6 @@ $(".view-map").click(function(){
 $("#close-map").click(function(){
 	$(".map-wrapper").fadeOut();
 });
-
 
 
 // BACK
@@ -482,7 +525,7 @@ $("#people-back").click(function(){
 // date picker
 var oneDay = 86400000;
 $("#from").datepicker({
-	dateFormat: 'mm-dd-yy',
+	dateFormat: 'yy-mm-dd',
 	changeMonth: true,
 	minDate: new Date(),
 	maxDate: '+1y',
@@ -506,7 +549,7 @@ $("#from").datepicker({
 });
 
 $("#to").datepicker({
-	dateFormat: 'mm-dd-yy',
+	dateFormat: 'yy-mm-dd',
 	changeMonth: true,
 	onSelect: function(){ // find number of days of journey
 		startDate = $('#from').datepicker('getDate');
