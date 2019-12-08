@@ -83,7 +83,7 @@
 				<span class="not-valid-date not-valid">Please enter valid pick-up date</span>
 				<input type="text" class="form-control text-2" id="from" name="from" autocomplete="off">
 
-				<label for="to" class="text-2 text pt-5">Drop off Date:</label>
+				<label for="to" class="text-2 text mt-5">Drop off Date:</label>
 				<span class="not-valid-date not-valid">Please enter valid drop off date</span>
 				<input type="text" class="form-control text-2" id="to" name="to" autocomplete="off">
 
@@ -116,7 +116,7 @@
 	<div class="wrapper vehicles-wrapper">
 		<div class="container">
 			<div class="vehicles-header mb-3">	
-				<h1 class="top-heading">Vehicles</h1>
+				<h1 class="top-heading thin-heading">Vehicles</h1>
 				<div class="journey-details-group" id="journey-details">
 					<div class="journey-details">
 						<p class="text-white text-2 mb-0" id="journey-details-dates"></p>
@@ -170,73 +170,87 @@
 
 	<div class="wrapper booking-wrapper" id="booking">
 		<div class="container">
-			<h1 class="top-heading">Your Booking Summary</h1>
-			<section class="summary-section">
-				<div class="row">
-					<div class="col">
-						<h2 class="text">Pick-up</h2>
-						<ul>
-							<li class="card-price text-16">Wellington Airport</li>
-							<li class="card-price text-16">08/12/2019</li>
-						</ul>
-					</div>
-					<div class="col">
-						<h2 class="text">Stopovers</h2>
-						<ul>
-							<li class="card-price text-16">Palmerston North</li>
-							<li class="card-price text-16">Tauranga</li>
-						</ul>
-					</div>
-					<div class="col">
-						<h2 class="text">Drop off</h2>
-						<ul>
-							<li class="card-price text-16">Auckland Airport</li>
-							<li class="card-price text-16">17/12/2019</li>
-						</ul>
-					</div>
+			<div class="mt-5 d-flex justify-content-between align-items-center">
+				<div class="summary-container">
+					<h1 class="top-heading">Your Booking Summary</h1>
+					<section class="summary-section">
+						<div class="row">
+							<div class="col">
+								<h2 class="text">Pick-up</h2>
+								<ul>
+									<li class="card-price text-16" id="start-loc"></li>
+									<li class="card-price text-16" id="start-date"></li>
+								</ul>
+							</div>
+							<div class="col">
+								<h2 class="text">Stopovers</h2>
+								<ul id="stopovers-list"></ul>
+							</div>
+							<div class="col">
+								<h2 class="text">Drop off</h2>
+								<ul>
+									<li class="card-price text-16" id="end-loc"></li>
+									<li class="card-price text-16" id="end-date"></li>
+								</ul>
+							</div>
+						</div>
+						<div class="d-flex justify-content-between">
+							<p class="accent-colour text-16 mb-0 clickable link" id="edit-locations1">Edit locations</p>
+							<p class="accent-colour text-16 mb-0 view-map link">View journey on map <i class="fas fa-map-marker-alt"></i></p>
+						</div>
+					</section>
+					<section class="summary-section">
+						<div class="row ">
+							<div class="col-6">
+								<h2 class="text" id="chosen-car-name"></h2>
+								<ul>
+									<li class="card-price text-16" id="cost-days"></li>
+									<li class="card-price text-16 text accent-colour" id="hire-cost1"></li>
+								</ul>
+								<p class="accent-colour mb-0 text-16 clickable link" id="change-vehicle">Change vehicle</p>
+							</div>
+							<div class="col-6" id="car-image"></div>
+						</div>
+					</section>
+					<section class="summary-section">
+						<div class="summary-prices">
+							<p class="mb-0 text text-16">Hire Cost:</p>
+							<p class="accent-colour mb-0 text-16" id="hire-cost2"></p>
+						</div>
+					</section>
+					<section class="summary-section">
+						<div class="summary-prices">
+							<p class="mb-0 text text-16">Journey Distance:</p>
+							<p class="accent-colour mb-0 text-16" id="distance-total"></p>
+						</div>
+					</section>
+					<section class="summary-section">
+						<div class="summary-prices">
+							<p class="mb-0 text text-16">Fuel Consumption Cost:</p>
+							<p class="accent-colour mb-0 text-16" id="fuel-cost"></p>
+						</div>
+					</section>
+					<section class="summary-section">
+						<div class="summary-prices">
+							<p class="mb-0 text text-16">Grand Total:</p>
+							<p class="accent-colour mb-0 text-16" id="grand-total">$10</p>
+						</div>
+					</section>
+					<button class="btn btn-success btn-booking big-booker">COMPLETE BOOKING</button>
 				</div>
-				<div class="row justify-content-between">
-					<div class="col-5">
-						<p class="accent-colour text-16 mb-0" id="edit-locations1">Edit locations</p>
-					</div>
-					<div class="col-7">
-						<p class="accent-colour text-16 mb-0" id="edit-locations1">View journey on map <i class="fas fa-map-marker-alt"></i></p>
-					</div>
-				</div>
-			</section>
-			<section class="summary-section">
-				<div class="row ">
-					<div class="col-6">
-						<h2 class="text">MG3 Auto</h2>
-						<ul>
-							<li class="card-price text-16">$50/day x 2 days</li>
-							<li class="card-price text-16 text accent-colour">$100</li>
-						</ul>
-						<p class="accent-colour mb-0 text-16" id="change-vehicle">Change vehicle</p>
-					</div>
-					<div class="col-6">
-						<img class="summary-img" src="images/small1.jpg" alt="Toyota">
-					</div>
-				</div>
-			</section>
-			<section class="summary-section">
-				<div class="summary-prices">
-					<p class="mb-0 text text-16">Hire Cost:</p>
-					<p class="accent-colour mb-0 text-16">$10</p>
-				</div>
-			</section>
-			<section class="summary-section">
-				<div class="summary-prices">
-					<p class="mb-0 text text-16">Hire Cost:</p>
-					<p class="accent-colour mb-0 text-16">$10</p>
-				</div>
-			</section>
-			<section class="summary-section">
-				<div class="summary-prices">
-					<p class="mb-0 text text-16">Hire Cost:</p>
-					<p class="accent-colour mb-0 text-16">$10</p>
-				</div>
-			</section>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="wrapper success-wrapper">
+		<div class="container">
+			<div class="d-flex flex-column justify-content-center align-items-center h-100">
+				<h1 class="text mb-5">Payment Successful</h1>
+				<i class="far fa-check-circle my-5"></i>
+				<h2 class="text text-2 my-5">We hope you enjoy your journey!</h2>
+				<!-- <button class="btn btn-info btn-return btn-lg text-2">Book another journey</button> -->
+			</div>
 		</div>
 	</div>
 
@@ -249,6 +263,15 @@
 		<div id="map-container"></div>
 	</div>
 
+
+	<!-- modal -->
+	<div class="wrapper modal-wrapper">
+		<div class="container">
+			<div class="d-flex justify-content-center align-items-center h-100">
+				<div class="modal-inner bg-white p-5" id="modal-content"></div>
+			</div>
+		</div>
+	</div>
 	<!-- bootstraps -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

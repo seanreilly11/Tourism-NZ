@@ -66,7 +66,7 @@ html, body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;
   font-size: 3.6rem;
-  padding-top: 20%;
+  padding-top: 15%;
   padding-bottom: 3rem; }
 
 .sub-heading {
@@ -189,7 +189,9 @@ html, body {
   height: 90%; }
 
 .top-heading {
-  padding: 4rem 0 2rem;
+  padding: 4rem 0 2rem; }
+
+.thin-heading {
   flex: 0.3; }
 
 .vehicle-type-heading {
@@ -248,6 +250,10 @@ html, body {
   left: 0;
   z-index: 150; }
 
+.summary-container {
+  width: 100%;
+  max-width: 500px; }
+
 .summary-section {
   position: relative;
   padding: 1.6rem 0; }
@@ -269,6 +275,61 @@ html, body {
   justify-content: space-between;
   align-items: center;
   width: 100%; }
+
+.link:hover {
+  text-decoration: underline;
+  opacity: .7; }
+
+.btn-booking {
+  padding: 1rem;
+  font-size: 2.8rem; }
+
+.big-booker {
+  width: 122%;
+  transform: translateX(-9%); }
+
+.fa-check-circle {
+  font-size: 20rem;
+  color: #37e334; }
+
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 300;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.modal-inner {
+  width: 100%;
+  vertical-align: middle; }
+
+.swiper-container {
+  width: 100%;
+  height: 20%; }
+
+.swiper-slide {
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center; }
+
+.modal-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 500px;
+  margin-left: 1rem; }
 
 @media screen and (min-width: 992px) {
   .main-desktop-logo {
@@ -304,6 +365,12 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex: 1; } }
+    flex: 1; }
+
+  .summary-container {
+    width: 40%; }
+
+  .modal-list {
+    grid-template-columns: 1fr 1fr; } }
 
 /*# sourceMappingURL=style.css.map */

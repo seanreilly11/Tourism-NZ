@@ -282,7 +282,7 @@ function printVehicles(){
 			+ "<div class='card-body'><h3 class='card-title text'>"+vehicles[i].name+"</h3>"
 			+ "<ul class='card-list'>"
 			+ "<li class='card-list-item'><i class='fas fa-user text-16'></i><span class='card-list-text text-16'>"+vehicles[i].minPeople + "-" + vehicles[i].maxPeople+"</span></li>"
-			+ "<li class='card-list-item'><i class='fas fa-gas-pump text-16'></i><span class='card-list-text text-16'>"+vehicles[i].fuel + "/100km</span></li></ul>"
+			+ "<li class='card-list-item'><i class='fas fa-gas-pump text-16'></i><span class='card-list-text text-16'>"+vehicles[i].fuel + "L/100km</span></li></ul>"
 			+ "<div class='card-foot'><ul class='card-pricing'>"
 			+ "<li class='card-price card-price-total accent-colour text-2 text'>$"+totalPrice+"</li>"
 			+ "<li class='card-price text-16'>$"+vehicles[i].rent+"/day</li></ul>"
@@ -327,7 +327,6 @@ function printVehicles(){
 		jLocs = startPtCode + ' > ' + stopovers[0].short + ' > ' + endPtCode;
 	}
 	document.getElementById("journey-details-locations").innerHTML = jLocs;
-
 	document.getElementById("pick-up-point").innerHTML = startPt;
 
 	var stopoverNames = [];
@@ -336,20 +335,105 @@ function printVehicles(){
 	}
 
 	document.getElementById("stopover-points").innerHTML = stopoverNames.join(", ");
-
 	document.getElementById("drop-off-point").innerHTML = endPt;
+
+	$(".card").click(function(){
+		$(".modal-wrapper").fadeIn();
+		printModal(this.id);
+	});
 
 	$(".btn-book").click(function(){
 		$(".vehicles-wrapper").fadeOut();
+		$(".modal-wrapper").hide();
 		$(".booking-wrapper").fadeIn();
-		printDetails();
+		printDetails(this.id);
 	});
 }
 
-// print booking summary
-function printDetails(){
-	console.log("Leshgo")
+
+// print modal details
+function printModal(id){
+	for(var i = 0; i < vehicles.length; i++){
+		if(vehicles[i].mainImg === id){
+			var car = vehicles[i];
+			var modal = "";
+			modal += '<div class="d-flex justify-content-between align-items-center">'
+			+ '<h1 class="top-heading pt-0">' + car.name + '</h1>'
+			+ '<button type="button" class="close" id="close-modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+			+ '<div class="swiper-container"><div class="swiper-wrapper">'
+			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div>'
+			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div>'
+			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div>'
+			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div></div>'
+			+ '<!-- Add Pagination --><div class="swiper-pagination"></div></div>'
+			+ '<div class="summary-section"><ul class="text-2 modal-list">'
+			+ '<li>' + car.maxPeople + ' Seats</li>'
+			+ '<li>' + car.transmission + '</li>'
+			+ '<li>' + car.engine + '</li>'
+			+ '<li>' + car.fuelType + '</li>'
+			+ '<li>' + car.fuel + 'L/100km</li>'
+			+ '</ul></div><div class="summary-section"><ul class="text-2 ml-3">';
+			for(var j = 0; j < car.features.length; j++){
+				modal += '<li>' + car.features[j] + '</li>';
+			}
+			modal += '</ul></div><div class="d-flex justify-content-around p-5">'
+			+ '<span class="text text-2">$' + car.rent + '/day</span>'
+			+ '<span class="accent-colour text text-2">$' + (car.rent * noDays) + ' total</span>'
+			+ '</div><button class="btn btn-success btn-book w-100 p-3 text-2">BOOK NOW</button>';
+			document.getElementById("modal-content").innerHTML = modal;
+
+			$("#close-modal").click(function(){
+				$(".modal-wrapper").fadeOut();
+			});
+			$(".btn-book").click(function(){
+				$(".vehicles-wrapper").fadeOut();
+				$(".modal-wrapper").fadeOut();
+				$(".booking-wrapper").fadeIn();
+				printDetails(this.id);
+			});
+
+			// swiper js
+			var swiper = new Swiper('.swiper-container', {
+			      slidesPerView: 2.25,
+			      pagination: {
+			        el: '.swiper-pagination',
+			        clickable: true,
+			      },
+			    });
+		}
+	}
 }
+
+
+
+
+// print booking summary
+function printDetails(id){
+	for(var i = 0; i < vehicles.length; i++){
+		if(vehicles[i].mainImg === id){
+			var car = vehicles[i];
+			totalPrice = car.rent * noDays
+			var fuelPrice = parseFloat((car.fuel * (totalDistance/100) * 2.07).toFixed(2)) // 2.07 is price of fuel
+			var grandTotal = (fuelPrice + totalPrice).toFixed(2);
+			document.getElementById("start-loc").innerHTML = startPt;
+			document.getElementById("start-date").innerHTML = from.value;
+			document.getElementById("end-loc").innerHTML = endPt;
+			document.getElementById("end-date").innerHTML = to.value;
+			document.getElementById("stopovers-list").innerHTML = "";
+			for(var j = 0; j < stopovers.length; j++){
+				document.getElementById("stopovers-list").innerHTML += '<li class="card-price text-16">' + stopovers[j].name + ' </li>';
+			}
+			document.getElementById("chosen-car-name").innerHTML = car.name;
+			document.getElementById("cost-days").innerHTML = "$" + car.rent + "/day x " + noDays + " days"
+			document.getElementById("hire-cost1").innerHTML = "$" + totalPrice;
+			document.getElementById("car-image").innerHTML = '<img class="summary-img" src="images/' + car.mainImg + '.jpg" alt="' + car.name + '">';
+			document.getElementById("hire-cost2").innerHTML = "$" + totalPrice;
+			document.getElementById("distance-total").innerHTML = totalDistance + "km";
+			document.getElementById("fuel-cost").innerHTML = "$" + fuelPrice; 
+			document.getElementById("grand-total").innerHTML = "$" + grandTotal; 
+		}
+	}	
+};
 
 function changeDateFormat(){
 	var f = from.value;
@@ -370,8 +454,7 @@ function changeDateFormat(){
 	var toDate = dayT + "/" + monthT + "/" + yearT;
 	var range = fromDate + " - " + toDate;
 	return range;
-	
-}
+};
 
 // calculate total distance
 function calculateTotalDistance(distances){
@@ -391,7 +474,7 @@ function calculateTotalDistance(distances){
 			totalDistance += leg;
 		}
 	}
-}
+};
 
 
 // get location values
@@ -437,18 +520,19 @@ document.getElementsByTagName('body')[0].appendChild(script);
 
 // jquery hide and show
 // NEXT
+$(".modal-wrapper").hide();
 $(".locations-wrapper").hide();
 $(".dates-wrapper").hide();
 $(".people-wrapper").hide();
 $(".map-wrapper").hide();
 $(".vehicles-wrapper").hide();
-// $(".booking-wrapper").hide();
+$(".booking-wrapper").hide();
+$(".success-wrapper").hide();
 $("#small-cars-container").hide();
 $("#large-cars-container").hide();
 $("#motorhome-container").hide();
 $("#motorbike-container").hide();
 $("#no-results-container").hide();
-
 
 
 $(".btn-home").click(function(){
@@ -470,7 +554,6 @@ $("#dates-next").click(function(){
 	if(from.value != "" && to.value != ""){
 		$(".dates-wrapper").fadeOut();
 		$(".people-wrapper").fadeIn();
-		// console.log(from.value, to.value)
 	}
 	else{
 		$(".not-valid-date").show();
@@ -483,8 +566,19 @@ $("#people-next").click(function(){
 	$(".vehicles-wrapper").fadeIn();
 });
 
+$(".btn-booking").click(function(){
+	$(".booking-wrapper").fadeOut();
+	$(".success-wrapper").fadeIn();
+});
 
+$(".btn-return").click(function(){
+	$(".success-wrapper").fadeOut();
+	startDate, endDate, noDays, waypts, stopovers, startPt, endPt, totalPrice, totalDistance, startPtCode, endPtCode = "";
+    numberOfPeople = 1;
+	$(".locations-wrapper").fadeIn();
+});
 
+// edit details
 $("#edit-dates").click(function(){
 	$(".vehicles-wrapper").fadeOut();
 	$(".dates-wrapper").fadeIn();
@@ -499,6 +593,16 @@ $("#edit-locations").click(function(){
 	$(".locations-wrapper").fadeIn();
 });
 
+$("#edit-locations1").click(function(){
+	$(".booking-wrapper").fadeOut();
+	$(".locations-wrapper").fadeIn();
+});
+
+$("#change-vehicle").click(function(){
+	$(".booking-wrapper").fadeOut();
+	$(".vehicles-wrapper").fadeIn();
+});
+
 
 // open and close map
 $(".view-map").click(function(){
@@ -508,6 +612,7 @@ $(".view-map").click(function(){
 $("#close-map").click(function(){
 	$(".map-wrapper").fadeOut();
 });
+
 
 
 // BACK
@@ -561,7 +666,6 @@ $("#to").datepicker({
 	}
 });
 
-// swiper js
 
 
 
