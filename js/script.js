@@ -323,7 +323,7 @@ function printVehicles(){
 	if(stopovers.length > 1){
 		jLocs = startPtCode + ' > ' + stopovers[0].short + ' <sup>+' + extraStops + '</sup> > ' + endPtCode;
 	}
-	else if(stopovers.length = 1){
+	else if(stopovers.length == 1){
 		jLocs = startPtCode + ' > ' + stopovers[0].short + ' > ' + endPtCode;
 	}
 	document.getElementById("journey-details-locations").innerHTML = jLocs;
@@ -412,8 +412,8 @@ function printDetails(id){
 	for(var i = 0; i < vehicles.length; i++){
 		if(vehicles[i].mainImg === id){
 			var car = vehicles[i];
-			totalPrice = car.rent * noDays
-			var fuelPrice = parseFloat((car.fuel * (totalDistance/100) * 2.07).toFixed(2)) // 2.07 is price of fuel
+			totalPrice = car.rent * noDays;
+			var fuelPrice = parseFloat((car.fuel * (totalDistance/100) * 2.07).toFixed(2)); // 2.07 is price of fuel
 			var grandTotal = (fuelPrice + totalPrice).toFixed(2);
 			document.getElementById("start-loc").innerHTML = startPt;
 			document.getElementById("start-date").innerHTML = from.value;
@@ -424,7 +424,7 @@ function printDetails(id){
 				document.getElementById("stopovers-list").innerHTML += '<li class="card-price text-16">' + stopovers[j].name + ' </li>';
 			}
 			document.getElementById("chosen-car-name").innerHTML = car.name;
-			document.getElementById("cost-days").innerHTML = "$" + car.rent + "/day x " + noDays + " days"
+			document.getElementById("cost-days").innerHTML = "$" + car.rent + "/day x " + noDays + " days";
 			document.getElementById("hire-cost1").innerHTML = "$" + totalPrice;
 			document.getElementById("car-image").innerHTML = '<img class="summary-img" src="images/' + car.mainImg + '.jpg" alt="' + car.name + '">';
 			document.getElementById("hire-cost2").innerHTML = "$" + totalPrice;
@@ -433,7 +433,7 @@ function printDetails(id){
 			document.getElementById("grand-total").innerHTML = "$" + grandTotal; 
 		}
 	}	
-};
+}
 
 function changeDateFormat(){
 	var f = from.value;
@@ -454,7 +454,7 @@ function changeDateFormat(){
 	var toDate = dayT + "/" + monthT + "/" + yearT;
 	var range = fromDate + " - " + toDate;
 	return range;
-};
+}
 
 // calculate total distance
 function calculateTotalDistance(distances){
@@ -474,7 +474,7 @@ function calculateTotalDistance(distances){
 			totalDistance += leg;
 		}
 	}
-};
+}
 
 
 // get location values
@@ -569,13 +569,6 @@ $("#people-next").click(function(){
 $(".btn-booking").click(function(){
 	$(".booking-wrapper").fadeOut();
 	$(".success-wrapper").fadeIn();
-});
-
-$(".btn-return").click(function(){
-	$(".success-wrapper").fadeOut();
-	startDate, endDate, noDays, waypts, stopovers, startPt, endPt, totalPrice, totalDistance, startPtCode, endPtCode = "";
-    numberOfPeople = 1;
-	$(".locations-wrapper").fadeIn();
 });
 
 // edit details
