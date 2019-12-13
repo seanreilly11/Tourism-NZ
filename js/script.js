@@ -286,7 +286,7 @@ function printVehicles(){
 			+ "<div class='card-foot'><ul class='card-pricing'>"
 			+ "<li class='card-price card-price-total accent-colour text-2 text'>$"+totalPrice+"</li>"
 			+ "<li class='card-price text-16'>$"+vehicles[i].rent+"/day</li></ul>"
-			+ "<button id='"+ vehicles[i].mainImg + "' class='btn btn-success btn-book text-16'>BOOK NOW</button>"
+			+ "<button id='"+ vehicles[i].mainImg + "' class='btn btn-success btn-modal text-16'>VIEW DETAILS</button>"
 			+ "</div></div></div>";
 
 			if(vehicles[i].type === "small"){
@@ -342,11 +342,9 @@ function printVehicles(){
 		printModal(this.id);
 	});
 
-	$(".btn-book").click(function(){
-		$(".vehicles-wrapper").fadeOut();
-		$(".modal-wrapper").hide();
-		$(".booking-wrapper").fadeIn();
-		printDetails(this.id);
+	$(".btn-modal").click(function(){
+		$(".modal-wrapper").fadeIn();
+		printModal(this.id);
 	});
 }
 
@@ -365,6 +363,8 @@ function printModal(id){
 			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div>'
 			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div>'
 			+ '<div class="swiper-slide"><img src="images/' + car.mainImg + '.jpg"></div></div>'
+			+ '<!-- Add Arrows --><div class="swiper-button-next"></div>'
+			+ '<div class="swiper-button-prev"></div>'
 			+ '<!-- Add Pagination --><div class="swiper-pagination"></div></div>'
 			+ '<div class="summary-section"><ul class="text-2 modal-list">'
 			+ '<li>' + car.maxPeople + ' Seats</li>'
@@ -379,27 +379,32 @@ function printModal(id){
 			modal += '</ul></div><div class="d-flex justify-content-around p-5">'
 			+ '<span class="text text-2">$' + car.rent + '/day</span>'
 			+ '<span class="accent-colour text text-2">$' + (car.rent * noDays) + ' total</span>'
-			+ '</div><button class="btn btn-success btn-book w-100 p-3 text-2">BOOK NOW</button>';
+			+ '</div><button id="' + car.mainImg + '" class="btn btn-success btn-book w-100 p-3 text-2">BOOK NOW</button>';
 			document.getElementById("modal-content").innerHTML = modal;
 
 			$("#close-modal").click(function(){
 				$(".modal-wrapper").fadeOut();
 			});
+
 			$(".btn-book").click(function(){
 				$(".vehicles-wrapper").fadeOut();
 				$(".modal-wrapper").fadeOut();
-				$(".booking-wrapper").fadeIn();
 				printDetails(this.id);
+				$(".booking-wrapper").fadeIn();
 			});
 
 			// swiper js
 			var swiper = new Swiper('.swiper-container', {
-			      slidesPerView: 2.25,
-			      pagination: {
-			        el: '.swiper-pagination',
-			        clickable: true,
-			      },
-			    });
+				slidesPerView: 2.25,
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				navigation: {
+			      nextEl: '.swiper-button-next',
+			      prevEl: '.swiper-button-prev',
+			    },
+			});
 		}
 	}
 }
@@ -542,8 +547,10 @@ $(".btn-home").click(function(){
 
 $("#locations-next").click(function(){
 	if((start.value != end.value) || (start.value == end.value && waypoints.value != "")){
+		$(".not-valid-locations").fadeOut();
 		$(".locations-wrapper").fadeOut();
 		$(".dates-wrapper").fadeIn();
+
 	}
 	else{
 		$(".not-valid-locations").show();
@@ -552,6 +559,7 @@ $("#locations-next").click(function(){
 
 $("#dates-next").click(function(){
 	if(from.value != "" && to.value != ""){
+		$(".not-valid-date").fadeOut();
 		$(".dates-wrapper").fadeOut();
 		$(".people-wrapper").fadeIn();
 	}
